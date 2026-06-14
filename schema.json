@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UAP File Record",
+  "description": "Canonical normalized record for a single UAP/UFO file or sighting. This is the contract every scraper writes to and the app reads from.",
+  "type": "object",
+  "required": ["id", "date", "location", "lat", "lng", "shape", "description", "source", "tags"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable unique ID. For official files, derive from the designator (e.g. 'dow-uap-d65'). For others, slug of source+date+location. Must be deterministic so re-scrapes don't duplicate."
+    },
+    "designator": {
+      "type": ["string", "null"],
+      "description": "Official government file number if any (e.g. 'DOW-UAP-D65', 'PR-49', 'MR-75')."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "ISO 8601 date (YYYY-MM-DD). Use the incident date, not the release date. If only a year is known, use YYYY-01-01 and set date_precision."
+    },
+    "date_precision": {
+      "type": "string",
+      "enum": ["day", "month", "year", "unknown"],
+      "default": "day"
+    },
+    "time": {
+      "type": ["string", "null"],
+      "description": "HH:MM 24h local time if known, else null."
+    },
+    "location": {
+      "type": "string",
+      "description": "Human-readable place name."
+    },
+    "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+    "lng": { "type": "number", "minimum": -180, "maximum": 180 },
+    "geo_precision": {
+      "type": "string",
+      "enum": ["exact", "city", "region", "theater", "approximate"],
+      "default": "approximate",
+      "description": "How precise the coordinates are. Theater = e.g. 'Persian Gulf' centroid."
+    },
+    "shape": {
+      "type": "string",
+      "enum": ["disc", "triangle", "orb", "cigar", "chevron", "boomerang", "diamond", "other", "unknown"]
+    },
+    "duration": { "type": ["string", "null"] },
+    "description": { "type": "string", "maxLength": 600 },
+    "witnesses": { "type": "integer", "minimum": 1, "default": 1 },
+    "source": {
+      "type": "object",
+      "required": ["agency", "collection"],
+      "properties": {
+        "agency": {
+          "type": "string",
+          "enum": ["DoD", "AARO", "CENTCOM", "INDOPACOM", "NORAD", "Army", "Navy", "AirForce", "FBI", "CIA", "NSA", "NASA", "State", "NARA", "NUFORC", "Other"]
+        },
+        "collection": {
+          "type": "string",
+          "description": "Which release/dataset (e.g. 'PURSUE-T1', 'PURSUE-T2', 'FBI-Vault', 'NARA-UAP', 'NUFORC')."
+        },
+        "url": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Direct link to the official record (war.gov, DVIDS, archives.gov, etc)."
+        }
+      }
+    },
+    "theater": {
+      "type": ["string", "null"],
+      "description": "Operational/geographic cluster for grouping (e.g. 'Persian Gulf', 'Iraq-Syria', 'Lunar', 'US-Domestic')."
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["video", "photo", "radar", "IR", "SWIR", "physical", "document", "audio", "testimony"] },
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": ["unresolved", "resolved", "anomalous", "historical"],
+      "default": "unresolved",
+      "description": "Official adjudication where stated. 'anomalous' = flagged for further analysis."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "scraped_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this record was last ingested. Lets the app show freshness and the scraper detect changes."
+    }
+  }
+}

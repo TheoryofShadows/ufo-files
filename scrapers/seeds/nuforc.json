@@ -1,0 +1,3 @@
+[
+  {"id":"nuforc-db","designator":null,"date":"2026-01-01","date_precision":"year","time":null,"location":"United States (NUFORC database)","lat":39.0,"lng":-98.0,"geo_precision":"approximate","shape":"other","duration":null,"description":"The National UFO Reporting Center maintains 100,000+ civilian sighting reports searchable by date/state/shape. Live scrape pulls recent highlights; full dataset available at nuforc.org.","witnesses":1,"source":{"agency":"NUFORC","collection":"NUFORC","url":"https://nuforc.org"},"theater":"US-Domestic","evidence":["testimony"],"status":"unresolved","tags":["NUFORC","civilian","database"]}
+]

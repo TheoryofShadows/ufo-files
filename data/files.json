@@ -1,0 +1,2960 @@
+{
+  "generated_at": "2026-06-14T22:31:37.012616Z",
+  "count": 92,
+  "sources": [
+    "historical",
+    "pursue",
+    "nara",
+    "fbi",
+    "cia",
+    "nsa",
+    "nasa",
+    "nuforc"
+  ],
+  "records": [
+    {
+      "id": "hist-r01",
+      "designator": null,
+      "date": "1942-02-25",
+      "date_precision": "day",
+      "time": "03:16",
+      "location": "Los Angeles, CA",
+      "lat": 34.05,
+      "lng": -118.24,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "1 hr",
+      "description": "Battle of LA: 1,400+ AA rounds fired at objects. Searchlights converged. Five civilians died.",
+      "witnesses": 1000,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "mass",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r02",
+      "designator": null,
+      "date": "1947-06-21",
+      "date_precision": "day",
+      "time": "14:00",
+      "location": "Maury Island, WA",
+      "lat": 47.38,
+      "lng": -122.43,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "20 min",
+      "description": "6 doughnut-shaped objects over Puget Sound. One dropped molten slag onto boat. Army CIC investigated.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "physical",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r03",
+      "designator": null,
+      "date": "1947-06-24",
+      "date_precision": "day",
+      "time": "15:00",
+      "location": "Mt. Rainier, WA",
+      "lat": 46.85,
+      "lng": -121.76,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "3 min",
+      "description": "Pilot Kenneth Arnold: 9 crescent objects at 1,200mph. Coined 'flying saucer.' First modern UFO sighting.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "pilot",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r04",
+      "designator": null,
+      "date": "1947-07-08",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "Roswell, NM",
+      "lat": 33.39,
+      "lng": -104.52,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "N/A",
+      "description": "Army announced 'flying disc' recovery, retracted to 'weather balloon.' Later attributed to Project Mogul.",
+      "witnesses": 5,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "crash",
+        "physical",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-roswell-memo",
+      "designator": null,
+      "date": "1947-07-08",
+      "date_precision": "day",
+      "time": null,
+      "location": "Roswell, NM (FBI memo)",
+      "lat": 33.39,
+      "lng": -104.52,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": null,
+      "description": "PURSUE included the FBI Dallas field-office memo to HQ reporting that an Air Force major said 'an object purporting to be a flying disc was recovered near Roswell.' Memo: 'hexagonal in shape, suspended from a balloon ~20 ft in diameter.'",
+      "witnesses": 5,
+      "source": {
+        "agency": "FBI",
+        "collection": "PURSUE-T1",
+        "url": "https://vault.fbi.gov/UFO"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "PURSUE",
+        "FBI",
+        "roswell",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "fbi-roswell-dallas",
+      "designator": "Dallas Field Office Memo",
+      "date": "1947-07-08",
+      "date_precision": "day",
+      "time": null,
+      "location": "Roswell, NM (FBI)",
+      "lat": 33.39,
+      "lng": -104.52,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": null,
+      "description": "FBI Dallas memo to HQ: an Air Force major reported a recovered 'flying disc' near Roswell, 'hexagonal in shape, suspended from a balloon ~20 ft in diameter.' Later included in PURSUE.",
+      "witnesses": 5,
+      "source": {
+        "agency": "FBI",
+        "collection": "FBI-Vault",
+        "url": "https://vault.fbi.gov/UFO"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "FBI",
+        "vault",
+        "roswell",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r05",
+      "designator": null,
+      "date": "1948-01-07",
+      "date_precision": "day",
+      "time": "13:15",
+      "location": "Fort Knox, KY",
+      "lat": 37.89,
+      "lng": -85.96,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "25 min",
+      "description": "Capt. Mantell crashed P-51 pursuing massive bright object. First pilot fatality linked to UFO.",
+      "witnesses": 12,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "pilot",
+        "fatality",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "fbi-hottel",
+      "designator": "Hottel Memo",
+      "date": "1950-03-22",
+      "date_precision": "day",
+      "time": null,
+      "location": "Washington, D.C. (FBI HQ)",
+      "lat": 38.9,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": null,
+      "description": "The most-viewed FBI Vault file. Agent Guy Hottel relayed an informant claim of three 'flying saucers' recovered in New Mexico, each ~50 ft, with occupants. Never substantiated by the FBI.",
+      "witnesses": 1,
+      "source": {
+        "agency": "FBI",
+        "collection": "FBI-Vault",
+        "url": "https://vault.fbi.gov/UFO"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "FBI",
+        "vault",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r06",
+      "designator": null,
+      "date": "1951-08-25",
+      "date_precision": "day",
+      "time": "21:20",
+      "location": "Lubbock, TX",
+      "lat": 33.56,
+      "lng": -101.85,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "5 min",
+      "description": "Three Texas Tech professors saw V-formation of 20-30 bluish-green lights. Student photographed them. Blue Book: unexplained.",
+      "witnesses": 30,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "academic",
+        "formation",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r07",
+      "designator": null,
+      "date": "1952-07-19",
+      "date_precision": "day",
+      "time": "23:40",
+      "location": "Washington, D.C.",
+      "lat": 38.85,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "6 hrs",
+      "description": "Objects on radar at National Airport + Andrews AFB. F-94s scrambled. Repeated Jul 26. Largest Pentagon press conf since WWII.",
+      "witnesses": 100,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "radar",
+        "jet-scramble",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "cia-robertson",
+      "designator": "Robertson Panel",
+      "date": "1953-01-14",
+      "date_precision": "day",
+      "time": null,
+      "location": "Washington, D.C. (CIA)",
+      "lat": 38.9,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "CIA-convened scientific panel that reviewed UFO data and recommended debunking sightings to reduce public interest. A foundational document in UFO secrecy history.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CIA",
+        "collection": "CIA-ReadingRoom",
+        "url": "https://www.cia.gov/readingroom/collection/ufos-fact-or-fiction"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "CIA",
+        "panel",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r08",
+      "designator": null,
+      "date": "1954-10-27",
+      "date_precision": "day",
+      "time": "14:30",
+      "location": "Florence, Italy",
+      "lat": 43.77,
+      "lng": 11.25,
+      "geo_precision": "city",
+      "shape": "cigar",
+      "duration": "10 min",
+      "description": "10,000+ spectators at football match watched cigar objects hover. Released silvery 'angel hair.' Match halted.",
+      "witnesses": 10000,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "mass",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r09",
+      "designator": null,
+      "date": "1956-08-13",
+      "date_precision": "day",
+      "time": "22:55",
+      "location": "Lakenheath, UK",
+      "lat": 52.41,
+      "lng": 0.56,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "5 hrs",
+      "description": "RAF/USAF radar tracked fast objects. Venom fighter got lock but object maneuvered behind and tailed it. Condon: 'most puzzling.'",
+      "witnesses": 30,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "radar",
+        "jet-scramble",
+        "EM",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r10",
+      "designator": null,
+      "date": "1957-11-02",
+      "date_precision": "day",
+      "time": "23:00",
+      "location": "Levelland, TX",
+      "lat": 33.57,
+      "lng": -102.37,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "3 hrs",
+      "description": "15 callers: egg-shaped object on roads. 9+ vehicles had engines and lights killed, restored after departure. Most important EM case in US.",
+      "witnesses": 15,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "EM",
+        "vehicle",
+        "police",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r11",
+      "designator": null,
+      "date": "1961-09-19",
+      "date_precision": "day",
+      "time": "22:30",
+      "location": "Lancaster, NH",
+      "lat": 44.49,
+      "lng": -71.57,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "2 hrs",
+      "description": "Betty and Barney Hill: disc with windows on Route 3. 'Missing time.' Car compass erratic near marks on vehicle afterward.",
+      "witnesses": 2,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "abduction",
+        "EM",
+        "physical",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r12",
+      "designator": null,
+      "date": "1964-04-24",
+      "date_precision": "day",
+      "time": "17:45",
+      "location": "Socorro, NM",
+      "lat": 34.06,
+      "lng": -106.89,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "10 min",
+      "description": "Officer Zamora saw egg-shaped craft + 2 small occupants. Burn marks, compressed soil, metal traces. Blue Book: 'unknown.'",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "police",
+        "physical",
+        "occupants",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r13",
+      "designator": null,
+      "date": "1965-09-03",
+      "date_precision": "day",
+      "time": "02:00",
+      "location": "Exeter, NH",
+      "lat": 42.98,
+      "lng": -70.95,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "45 min",
+      "description": "Hitchhiker + two police officers saw pulsating red lights over fields. 60+ reports followed. Blue Book: 'unidentified.'",
+      "witnesses": 60,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "police",
+        "mass",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r14",
+      "designator": null,
+      "date": "1965-12-09",
+      "date_precision": "day",
+      "time": "16:45",
+      "location": "Kecksburg, PA",
+      "lat": 40.18,
+      "lng": -79.46,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "30 min",
+      "description": "Fireball across 6 states. Acorn-shaped object recovered by military. Witnesses described hieroglyphic-like markings.",
+      "witnesses": 100,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "crash",
+        "military",
+        "physical",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r15",
+      "designator": null,
+      "date": "1966-04-06",
+      "date_precision": "day",
+      "time": "11:00",
+      "location": "Westall, Melbourne",
+      "lat": -37.93,
+      "lng": 145.1,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "20 min",
+      "description": "200+ students and staff saw grey saucer descend, land, ascend at extreme speed. Landing site grass flattened in circle.",
+      "witnesses": 200,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "school",
+        "mass",
+        "landing",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r17",
+      "designator": null,
+      "date": "1967-05-20",
+      "date_precision": "day",
+      "time": "12:15",
+      "location": "Falcon Lake, Manitoba",
+      "lat": 49.7,
+      "lng": -95.25,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "30 min",
+      "description": "Geologist Michalak touched a landed disc. Hot exhaust burned grid into his chest. Hospitalized. Canada $20 coin 2018.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "physical",
+        "radiation",
+        "landing",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r16",
+      "designator": null,
+      "date": "1967-10-04",
+      "date_precision": "day",
+      "time": "20:00",
+      "location": "Shag Harbour, NS",
+      "lat": 43.46,
+      "lng": -65.74,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "30 min",
+      "description": "RCMP officers saw lit object crash into harbour. Navy divers found nothing. Official Canadian govt 'UFO incident.'",
+      "witnesses": 30,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "police",
+        "crash",
+        "underwater",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-apollo11",
+      "designator": null,
+      "date": "1969-07-20",
+      "date_precision": "day",
+      "time": null,
+      "location": "Apollo 11, lunar orbit",
+      "lat": 0.67,
+      "lng": 23.47,
+      "geo_precision": "approximate",
+      "shape": "orb",
+      "duration": null,
+      "description": "PURSUE files: Buzz Aldrin described unusual lights and objects during Apollo 11. Long-debated sighting now in official record. Skeptics attribute to panel reflections or detached debris.",
+      "witnesses": 3,
+      "source": {
+        "agency": "NASA",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Lunar",
+      "evidence": [
+        "testimony",
+        "document"
+      ],
+      "status": "resolved",
+      "tags": [
+        "PURSUE",
+        "NASA",
+        "apollo",
+        "lunar"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t2-apollo12",
+      "designator": null,
+      "date": "1969-11-19",
+      "date_precision": "day",
+      "time": null,
+      "location": "Apollo 12, Moon",
+      "lat": -3.01,
+      "lng": -23.42,
+      "geo_precision": "approximate",
+      "shape": "orb",
+      "duration": null,
+      "description": "PURSUE Release 2: reports of 'green fireballs' or 'green orbs' during the Apollo 12 mission, plus crew audio describing inflight light 'streaks.'",
+      "witnesses": 3,
+      "source": {
+        "agency": "NASA",
+        "collection": "PURSUE-T2",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Lunar",
+      "evidence": [
+        "audio",
+        "document"
+      ],
+      "status": "resolved",
+      "tags": [
+        "PURSUE",
+        "NASA",
+        "apollo",
+        "orb",
+        "lunar"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-apollo17",
+      "designator": "NASA-UAP-VM6",
+      "date": "1972-12-11",
+      "date_precision": "day",
+      "time": null,
+      "location": "Apollo 17, Moon",
+      "lat": 20.19,
+      "lng": 30.77,
+      "geo_precision": "approximate",
+      "shape": "triangle",
+      "duration": null,
+      "description": "PURSUE NASA file: Apollo 17 imagery shows three dots in triangular formation in lunar sky. Jack Schmitt: 'It's like the Fourth of July out there!' Analysts attribute to micrometeoroid impacts/debris.",
+      "witnesses": 3,
+      "source": {
+        "agency": "NASA",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Lunar",
+      "evidence": [
+        "photo",
+        "document"
+      ],
+      "status": "resolved",
+      "tags": [
+        "PURSUE",
+        "NASA",
+        "apollo",
+        "triangle",
+        "lunar"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r18",
+      "designator": null,
+      "date": "1973-10-18",
+      "date_precision": "day",
+      "time": "23:00",
+      "location": "Mansfield, OH",
+      "lat": 40.76,
+      "lng": -82.52,
+      "geo_precision": "city",
+      "shape": "cigar",
+      "duration": "5 min",
+      "description": "Army helicopter pulled upward 1,800ft by cigar-shaped object without pilot input. 4 crew + ground witnesses.",
+      "witnesses": 9,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "pilot",
+        "EM",
+        "vehicle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r19",
+      "designator": null,
+      "date": "1975-11-07",
+      "date_precision": "day",
+      "time": "22:00",
+      "location": "Travis AFB, CA",
+      "lat": 38.26,
+      "lng": -121.93,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "2 hrs",
+      "description": "Security police saw luminous objects over weapons storage. Part of wave over US nuclear sites (Malmstrom, Loring, Wurtsmith).",
+      "witnesses": 15,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "nuclear",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r20",
+      "designator": null,
+      "date": "1976-09-19",
+      "date_precision": "day",
+      "time": "01:30",
+      "location": "Tehran, Iran",
+      "lat": 35.69,
+      "lng": 51.39,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "90 min",
+      "description": "F-4 Phantoms scrambled. Weapons systems jammed on approach. Confirmed by SECRET US DIA documents.",
+      "witnesses": 20,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "jet-scramble",
+        "EM",
+        "weapons-jam",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r21",
+      "designator": null,
+      "date": "1978-10-21",
+      "date_precision": "day",
+      "time": "18:00",
+      "location": "Bass Strait, Australia",
+      "lat": -39.47,
+      "lng": 145.5,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "6 min",
+      "description": "Pilot Valentich radioed ATC describing unknown aircraft above him. Transmission cut off mid-sentence. Neither found.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "pilot",
+        "fatality",
+        "disappearance",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r22",
+      "designator": null,
+      "date": "1980-12-26",
+      "date_precision": "day",
+      "time": "03:00",
+      "location": "Rendlesham Forest, UK",
+      "lat": 52.08,
+      "lng": 1.43,
+      "geo_precision": "city",
+      "shape": "triangle",
+      "duration": "3 days",
+      "description": "USAF at RAF Woodbridge: glowing triangle over 3 nights. Lt. Col. Halt recorded elevated radiation + EM effects. 'Britain's Roswell.'",
+      "witnesses": 20,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "triangle",
+        "physical",
+        "radiation",
+        "EM",
+        "landing",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r23",
+      "designator": null,
+      "date": "1980-12-29",
+      "date_precision": "day",
+      "time": "21:00",
+      "location": "Huffman, TX",
+      "lat": 29.95,
+      "lng": -95.08,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "15 min",
+      "description": "Cash-Landrum: diamond object belching flame, 23 military helicopters. All three witnesses suffered radiation burns. Cash died of cancer.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "radiation",
+        "military",
+        "physical",
+        "EM",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r24",
+      "designator": null,
+      "date": "1986-05-19",
+      "date_precision": "day",
+      "time": "21:00",
+      "location": "Sao Paulo, Brazil",
+      "lat": -23.55,
+      "lng": -46.63,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "3 hrs",
+      "description": "Brazilian AF scrambled F-5E and Mirage jets to intercept 20+ UFOs on radar across several states. Confirmed by AF Minister.",
+      "witnesses": 50,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "jet-scramble",
+        "radar",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r43",
+      "designator": null,
+      "date": "1986-11-17",
+      "date_precision": "day",
+      "time": "17:45",
+      "location": "Alaska (JAL 1628)",
+      "lat": 62.0,
+      "lng": -150.0,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "50 min",
+      "description": "JAL 747 crew saw two small objects and one 'walnut-shaped' craft the size of a carrier. FAA radar confirmed. Division Chief preserved data.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "aviation",
+        "pilot",
+        "radar",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r25",
+      "designator": null,
+      "date": "1987-11-11",
+      "date_precision": "day",
+      "time": "17:00",
+      "location": "Gulf Breeze, FL",
+      "lat": 30.36,
+      "lng": -87.16,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "Months",
+      "description": "Hundreds reported luminous craft with blue beam. Ed Walters photographed. Six AWOL Army intel analysts found in area.",
+      "witnesses": 200,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "mass",
+        "military",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r26",
+      "designator": null,
+      "date": "1989-11-29",
+      "date_precision": "day",
+      "time": "18:45",
+      "location": "Eupen, Belgium",
+      "lat": 50.63,
+      "lng": 6.04,
+      "geo_precision": "city",
+      "shape": "triangle",
+      "duration": "5 months",
+      "description": "~13,500 witnesses. Silent triangular craft. F-16s got radar lock; objects pulled 40g+ evasive maneuvers. Military press conference.",
+      "witnesses": 13500,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "triangle",
+        "military",
+        "jet-scramble",
+        "radar",
+        "mass",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r27",
+      "designator": null,
+      "date": "1990-03-30",
+      "date_precision": "day",
+      "time": "23:00",
+      "location": "Brussels, Belgium",
+      "lat": 50.85,
+      "lng": 4.35,
+      "geo_precision": "city",
+      "shape": "triangle",
+      "duration": "1 hr",
+      "description": "Belgian wave: Two F-16s scrambled. Radar: 280 to 1,800km/h acceleration and 1,500m dive in 1-2 seconds.",
+      "witnesses": 2000,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "triangle",
+        "military",
+        "jet-scramble",
+        "radar",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r44",
+      "designator": null,
+      "date": "1991-11-29",
+      "date_precision": "day",
+      "time": "19:00",
+      "location": "Greifswald, Germany",
+      "lat": 54.1,
+      "lng": 13.39,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "30 min",
+      "description": "Luminous orbs near Greifswald nuclear power plant. Videotaped from multiple angles.",
+      "witnesses": 500,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "nuclear",
+        "video",
+        "orb",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r28",
+      "designator": null,
+      "date": "1994-09-16",
+      "date_precision": "day",
+      "time": "10:15",
+      "location": "Ruwa, Zimbabwe",
+      "lat": -17.87,
+      "lng": 31.24,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "15 min",
+      "description": "62 children at Ariel School saw silver disc land. Described beings communicating telepathically. Harvard's Dr. John Mack investigated.",
+      "witnesses": 62,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "school",
+        "landing",
+        "occupants",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r45",
+      "designator": null,
+      "date": "1995-01-20",
+      "date_precision": "day",
+      "time": "18:20",
+      "location": "Varginha, Brazil",
+      "lat": -21.55,
+      "lng": -45.43,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "Days",
+      "description": "Witnesses reported small beings captured by military and fire dept. Two entities taken to hospital. Military denied involvement.",
+      "witnesses": 8,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "occupants",
+        "military",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r29",
+      "designator": null,
+      "date": "1997-03-13",
+      "date_precision": "day",
+      "time": "19:55",
+      "location": "Henderson NV to Prescott AZ",
+      "lat": 34.61,
+      "lng": -112.32,
+      "geo_precision": "city",
+      "shape": "chevron",
+      "duration": "45 min",
+      "description": "V-formation from Henderson NV moving SE. Former police officer in Paulden confirmed. Prescott Valley: mile-wide silent craft.",
+      "witnesses": 500,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "mass",
+        "formation",
+        "triangle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r30",
+      "designator": null,
+      "date": "1997-03-13",
+      "date_precision": "day",
+      "time": "20:30",
+      "location": "Phoenix, AZ",
+      "lat": 33.45,
+      "lng": -112.07,
+      "geo_precision": "city",
+      "shape": "chevron",
+      "duration": "2 hrs",
+      "description": "Thousands saw V-formation spanning a mile. Second event ~10pm: orbs over Sierra Estrella. Governor confirmed personal sighting.",
+      "witnesses": 10000,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "mass",
+        "formation",
+        "triangle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r31",
+      "designator": null,
+      "date": "1997-03-13",
+      "date_precision": "day",
+      "time": "21:15",
+      "location": "Tucson, AZ",
+      "lat": 32.22,
+      "lng": -110.93,
+      "geo_precision": "city",
+      "shape": "chevron",
+      "duration": "20 min",
+      "description": "Southernmost Phoenix Lights reports. Object tracked ~300 miles from Nevada to Tucson in ~90 min.",
+      "witnesses": 200,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "mass",
+        "formation",
+        "triangle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r32",
+      "designator": null,
+      "date": "2000-01-05",
+      "date_precision": "day",
+      "time": "04:00",
+      "location": "St. Clair County, IL",
+      "lat": 38.52,
+      "lng": -89.98,
+      "geo_precision": "city",
+      "shape": "triangle",
+      "duration": "30 min",
+      "description": "Triangle tracked by police across multiple towns. Officers radioed each other in real-time. Sketch composites matched.",
+      "witnesses": 8,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "police",
+        "triangle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r33",
+      "designator": null,
+      "date": "2004-11-14",
+      "date_precision": "day",
+      "time": "14:00",
+      "location": "USS Nimitz, Pacific",
+      "lat": 31.33,
+      "lng": -117.17,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "5 min",
+      "description": "Cmdr. Fravor: white 'Tic Tac' 40ft hovering above churning water. Accelerated beyond visual range in <1 sec. FLIR declassified 2020.",
+      "witnesses": 6,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "pilot",
+        "radar",
+        "video",
+        "EM",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r34",
+      "designator": null,
+      "date": "2006-11-07",
+      "date_precision": "day",
+      "time": "16:15",
+      "location": "O'Hare Airport, Chicago",
+      "lat": 41.98,
+      "lng": -87.9,
+      "geo_precision": "city",
+      "shape": "disc",
+      "duration": "5 min",
+      "description": "United Airlines staff at Gate C17: dark metallic disc below clouds. Shot upward punching hole in overcast. FAA refused to investigate.",
+      "witnesses": 12,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "aviation",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r35",
+      "designator": null,
+      "date": "2008-01-08",
+      "date_precision": "day",
+      "time": "18:15",
+      "location": "Stephenville, TX",
+      "lat": 32.22,
+      "lng": -98.22,
+      "geo_precision": "city",
+      "shape": "chevron",
+      "duration": "4 min",
+      "description": "Dozens saw football-field-sized craft. F-16s in area. FAA radar confirmed anomalous returns.",
+      "witnesses": 50,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "pilot",
+        "military",
+        "radar",
+        "triangle",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r36",
+      "designator": null,
+      "date": "2013-04-25",
+      "date_precision": "day",
+      "time": "21:30",
+      "location": "Aguadilla, PR",
+      "lat": 18.5,
+      "lng": -67.14,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "3 min",
+      "description": "US Customs IR camera: object at 100+ mph split into two and entered ocean without slowing. DHS video leaked.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "video",
+        "underwater",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r37",
+      "designator": null,
+      "date": "2015-01-15",
+      "date_precision": "day",
+      "time": "12:00",
+      "location": "USS Roosevelt, Atlantic",
+      "lat": 30.5,
+      "lng": -79.8,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "Months",
+      "description": "Navy pilots: daily encounters 2014-15. GIMBAL and GOFAST IR videos. Objects with no propulsion against 120kt winds.",
+      "witnesses": 50,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "pilot",
+        "radar",
+        "video",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r46",
+      "designator": null,
+      "date": "2017-12-16",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "Pentagon (NYT reveal)",
+      "lat": 38.87,
+      "lng": -77.06,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "NY Times revealed AATIP, the Pentagon's secret $22M UFO program run 2007-2012 by Luis Elizondo. Published FLIR1 video. Pivotal moment that broke the modern taboo.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "AATIP",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r38",
+      "designator": null,
+      "date": "2019-07-15",
+      "date_precision": "day",
+      "time": "21:00",
+      "location": "USS Omaha, Pacific",
+      "lat": 32.57,
+      "lng": -117.12,
+      "geo_precision": "city",
+      "shape": "orb",
+      "duration": "Multiple",
+      "description": "Navy CIC filmed spheres swarming ship. One entered ocean without slowing. Pentagon confirmed video 2021.",
+      "witnesses": 30,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "video",
+        "underwater",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t2-gulf-formation",
+      "designator": null,
+      "date": "2019-10-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Persian Gulf (formation)",
+      "lat": 26.5,
+      "lng": 52.0,
+      "geo_precision": "theater",
+      "shape": "orb",
+      "duration": "Multiple",
+      "description": "PURSUE Release 2: formation-flying UAPs recorded over the Persian Gulf, Oct 2019. Multiple objects in coordinated flight. Contemporaneous with the USS Omaha swarm.",
+      "witnesses": 30,
+      "source": {
+        "agency": "Navy",
+        "collection": "PURSUE-T2",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Persian Gulf",
+      "evidence": [
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "formation",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r39",
+      "designator": null,
+      "date": "2020-04-27",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "Pentagon (released)",
+      "lat": 38.87,
+      "lng": -77.06,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "Pentagon officially released 3 Navy UAP videos (FLIR1, GIMBAL, GOFAST). First official US govt acknowledgment.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r47",
+      "designator": null,
+      "date": "2020-04-27",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "Pentagon (official release)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "Pentagon officially released 3 Navy UAP videos (FLIR1, GIMBAL, GOFAST), confirming authenticity. First official US govt acknowledgment of unidentified craft on camera.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "video",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-pr45",
+      "designator": "DOW-UAP-PR45",
+      "date": "2020-06-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Middle East (PR-45)",
+      "lat": 26.5,
+      "lng": 51.5,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "58 sec",
+      "description": "Department of the Air Force infrared video, 58 seconds, Middle East theater. Object tracked on IR sensor.",
+      "witnesses": 1,
+      "source": {
+        "agency": "AirForce",
+        "collection": "PURSUE-T1",
+        "url": "https://www.dvidshub.net/video/1006105/"
+      },
+      "theater": "Persian Gulf",
+      "evidence": [
+        "IR",
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "airforce",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mr65",
+      "designator": "DOW-UAP-D65",
+      "date": "2020-07-16",
+      "date_precision": "day",
+      "time": null,
+      "location": "Persian Gulf (MR-65)",
+      "lat": 26.5,
+      "lng": 51.5,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator reported a UAP over the Persian Gulf. CENTCOM mission report.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Persian Gulf",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mr63",
+      "designator": "DOW-UAP-D63",
+      "date": "2020-10-01",
+      "date_precision": "day",
+      "time": null,
+      "location": "Strait of Hormuz (MR-63)",
+      "lat": 26.57,
+      "lng": 56.25,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator reported a UAP over the Strait of Hormuz. One of three Hormuz-area reports in the release.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Persian Gulf",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mr64",
+      "designator": "DOW-UAP-D64",
+      "date": "2020-11-02",
+      "date_precision": "day",
+      "time": null,
+      "location": "Iran (MR-64)",
+      "lat": 32.0,
+      "lng": 53.0,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator reported a UAP over Iran. CENTCOM IR sensor. Adds to the record of UAP over Iranian airspace dating to the 1976 Tehran F-4 case.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Iran",
+      "evidence": [
+        "IR",
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM",
+        "IR"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r48",
+      "designator": null,
+      "date": "2021-06-25",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "ODNI (report)",
+      "lat": 38.87,
+      "lng": -77.06,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "ODNI Preliminary Assessment on UAP: 144 reports (2004-2021), only 1 identified (balloon). 18 exhibited 'unusual movement patterns' including stationary hover in high winds.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "ODNI",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r49",
+      "designator": null,
+      "date": "2022-07-15",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "Pentagon (AARO created)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "DoD establishes All-domain Anomaly Resolution Office (AARO) under Dr. Sean Kirkpatrick. Tasked to investigate UAP across air, sea, space. First permanent UAP office.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "AARO",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-d16",
+      "designator": "DOW-UAP-D16",
+      "date": "2022-07-31",
+      "date_precision": "day",
+      "time": null,
+      "location": "Syria (D16)",
+      "lat": 35.0,
+      "lng": 38.5,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator observed one UAP move north to south, total duration under one minute. Captured during active US operations in Syria.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Iraq-Syria",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t3-cosprings",
+      "designator": null,
+      "date": "2022-08-01",
+      "date_precision": "month",
+      "time": "21:00",
+      "location": "Colorado Springs, CO",
+      "lat": 38.83,
+      "lng": -104.82,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "PURSUE Release 3: FBI file on a 'potato'-shaped object, 'creamy/whitish opalescent,' 'somewhat translucent with a slight shimmer.' FBI produced an artistic interpretation from the witness description.",
+      "witnesses": 2,
+      "source": {
+        "agency": "FBI",
+        "collection": "PURSUE-T3",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "FBI"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t2-iran",
+      "designator": null,
+      "date": "2022-09-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Off Iran coast",
+      "lat": 26.5,
+      "lng": 56.25,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "3 min",
+      "description": "PURSUE Release 2 video: four UFOs in formation near Iranian boats, captured by US military IR. Officials did not publicly identify the objects.",
+      "witnesses": 4,
+      "source": {
+        "agency": "DoD",
+        "collection": "PURSUE-T2",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Iran",
+      "evidence": [
+        "IR",
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "IR",
+        "formation"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-d18",
+      "designator": "DOW-UAP-D18 / PR-23",
+      "date": "2022-12-01",
+      "date_precision": "day",
+      "time": null,
+      "location": "Iraq (D18 / PR-23)",
+      "lat": 33.3,
+      "lng": 44.4,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "10 sec",
+      "description": "CENTCOM IR sensor video shows an area of contrast moving bottom-left to top-right, leaving frame at ~6 sec. Operator reported a 'possible UAP' flying west to east; did not pursue.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Iraq-Syria",
+      "evidence": [
+        "IR",
+        "video",
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r40",
+      "designator": null,
+      "date": "2023-02-04",
+      "date_precision": "day",
+      "time": "14:30",
+      "location": "Off South Carolina",
+      "lat": 32.78,
+      "lng": -79.93,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "8 days",
+      "description": "US shot down Chinese balloon + 3 unidentified objects (Alaska, Yukon, Lake Huron). The 3 unknowns never identified.",
+      "witnesses": 200,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "shootdown",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r50",
+      "designator": null,
+      "date": "2023-02-04",
+      "date_precision": "day",
+      "time": "14:30",
+      "location": "Off South Carolina",
+      "lat": 32.78,
+      "lng": -79.93,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "8 days",
+      "description": "US shot down Chinese surveillance balloon + 3 unidentified objects over N. America in 8 days (Alaska, Yukon, Lake Huron). The 3 unknowns never recovered or identified.",
+      "witnesses": 200,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "military",
+        "shootdown",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t2-huron",
+      "designator": null,
+      "date": "2023-02-12",
+      "date_precision": "day",
+      "time": "14:42",
+      "location": "Lake Huron (F-16 shootdown)",
+      "lat": 44.8,
+      "lng": -82.5,
+      "geo_precision": "region",
+      "shape": "other",
+      "duration": null,
+      "description": "PURSUE Release 2: F-16 gun-camera footage of the Feb 2023 Lake Huron shootdown. One of 4 objects downed over N. America in 8 days. Octagonal object at ~20,000 ft, never recovered.",
+      "witnesses": 50,
+      "source": {
+        "agency": "NORAD",
+        "collection": "PURSUE-T2",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "shootdown",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r51",
+      "designator": null,
+      "date": "2023-06-05",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "The Debrief (Grusch)",
+      "lat": 38.9,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "David Grusch, former NGA/UAP Task Force officer, went public alleging multi-decade crash retrieval and reverse-engineering programs. Filed complaint with IC IG, found 'credible and urgent.'",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "whistleblower",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r41",
+      "designator": null,
+      "date": "2023-07-26",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "US Congress",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "Grusch testified about crash retrieval programs. Fravor and Graves also testified. Bipartisan UAPDA legislation introduced.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "congressional",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r52",
+      "designator": null,
+      "date": "2023-07-26",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "US Congress (hearing 1)",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "3 hrs",
+      "description": "Grusch, Fravor, Graves testified under oath. Grusch: non-human biologics recovered. Fravor: Tic Tac encounter. Graves: daily encounters off East Coast. Bipartisan UAPDA introduced.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "congressional",
+        "whistleblower",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "nasa-uap-study-2023",
+      "designator": "NASA UAP Independent Study",
+      "date": "2023-09-14",
+      "date_precision": "day",
+      "time": null,
+      "location": "NASA HQ, Washington D.C.",
+      "lat": 38.88,
+      "lng": -77.02,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "NASA's independent study team published its UAP report, calling for better calibrated sensors and rigorous data, and finding no evidence of extraterrestrial origin while urging destigmatized scientific study.",
+      "witnesses": 1,
+      "source": {
+        "agency": "NASA",
+        "collection": "NASA-UAP",
+        "url": "https://science.nasa.gov/uap/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "NASA",
+        "study",
+        "science"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-d23",
+      "designator": "DOW-UAP-D23 / PR-26",
+      "date": "2023-10-31",
+      "date_precision": "day",
+      "time": null,
+      "location": "UAE (PR-26)",
+      "lat": 24.45,
+      "lng": 54.38,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "43 sec",
+      "description": "CENTCOM IR sensor recorded a UAP over the United Arab Emirates. 43 seconds of infrared footage.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Persian Gulf",
+      "evidence": [
+        "IR",
+        "video",
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mr74",
+      "designator": "DOW-UAP-D74",
+      "date": "2023-11-09",
+      "date_precision": "day",
+      "time": null,
+      "location": "Syria (MR-74)",
+      "lat": 35.0,
+      "lng": 38.5,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator reported a UAP over Syria during active operations. CENTCOM mission report.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Iraq-Syria",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-d7",
+      "designator": "DOW-UAP-D7 / PR-28",
+      "date": "2024-01-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Greece (PR-28)",
+      "lat": 39.0,
+      "lng": 22.0,
+      "geo_precision": "theater",
+      "shape": "diamond",
+      "duration": "65 sec",
+      "description": "CENTCOM multi-sensor video of a 'diamond-shaped' UAP at ~434 knots, detectable only via short-wave infrared (SWIR). Split-screen EO/SWIR footage over the Mediterranean.",
+      "witnesses": 2,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Mediterranean",
+      "evidence": [
+        "SWIR",
+        "video",
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM",
+        "diamond",
+        "SWIR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r53",
+      "designator": null,
+      "date": "2024-03-01",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "AARO HQ (Vol 1 report)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "AARO Historical Record Report Vol 1: reviewed 1945-present, found 'no empirical evidence' of crash retrievals or reverse-engineering. Contradicted Grusch. Critics disputed methodology.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "AARO",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-pr48",
+      "designator": "DOW-UAP-PR48",
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Indo-Pacific (PR-48)",
+      "lat": 15.0,
+      "lng": 135.0,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "99 sec",
+      "description": "INDOPACOM infrared video tracking an area of contrast, 1:39. A Pacific-theater capture distinct from the Middle East cluster.",
+      "witnesses": 1,
+      "source": {
+        "agency": "INDOPACOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.dvidshub.net/video/1006110/"
+      },
+      "theater": "Indo-Pacific",
+      "evidence": [
+        "IR",
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "INDOPACOM",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-pr46",
+      "designator": "DOW-UAP-PR46",
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Indo-Pacific (PR-46)",
+      "lat": 15.0,
+      "lng": 135.0,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "9 sec",
+      "description": "INDOPACOM 'football-shaped contrast' report, 9 seconds of footage. Short capture of an elliptical object on IR.",
+      "witnesses": 1,
+      "source": {
+        "agency": "INDOPACOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.dvidshub.net/video/1006106/"
+      },
+      "theater": "Indo-Pacific",
+      "evidence": [
+        "IR",
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "INDOPACOM",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mediterranean-tri",
+      "designator": null,
+      "date": "2024-06-01",
+      "date_precision": "month",
+      "time": null,
+      "location": "Mediterranean Sea",
+      "lat": 35.0,
+      "lng": 18.0,
+      "geo_precision": "theater",
+      "shape": "triangle",
+      "duration": "5 min",
+      "description": "Pilot described a 'triangular and metallic UAP' flying at 25,000 ft over the Mediterranean. Among modern military incident reports in tranche 1.",
+      "witnesses": 2,
+      "source": {
+        "agency": "DoD",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Mediterranean",
+      "evidence": [
+        "testimony",
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "triangle",
+        "aviation"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r54",
+      "designator": null,
+      "date": "2024-06-26",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "GREMLIN (prototype test)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "AARO deployed GREMLIN, its prototype multi-sensor UAP detection system. Successfully collected data during March 2024 test. Planned for 90-day deployment at site of national security.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "AARO",
+        "sensor",
+        "GREMLIN",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-mr75",
+      "designator": "DOW-UAP-D75",
+      "date": "2024-07-14",
+      "date_precision": "day",
+      "time": null,
+      "location": "Gulf of Aden (MR-75)",
+      "lat": 12.5,
+      "lng": 48.0,
+      "geo_precision": "theater",
+      "shape": "other",
+      "duration": "<1 min",
+      "description": "US military operator reported a UAP over the Gulf of Aden. CENTCOM mission report. Most recent CENTCOM report in PURSUE tranche 1.",
+      "witnesses": 1,
+      "source": {
+        "agency": "CENTCOM",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Gulf of Aden",
+      "evidence": [
+        "document"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "CENTCOM"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r42",
+      "designator": null,
+      "date": "2024-09-17",
+      "date_precision": "day",
+      "time": "14:00",
+      "location": "Palmdale, CA",
+      "lat": 34.58,
+      "lng": -118.13,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "Unknown",
+      "description": "ATC at LA Center reported UAP to NUFORC observed by military King Air crew on active frequency. Under investigation.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "aviation",
+        "military",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r55",
+      "designator": null,
+      "date": "2024-11-13",
+      "date_precision": "day",
+      "time": "11:30",
+      "location": "US Congress (hearing 2)",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "3 hrs",
+      "description": "Elizondo, Gallaudet, Gold, Shellenberger testified. Elizondo confirmed reverse-engineering program exists. Gallaudet described personal 2015 Navy encounter. Elizondo called coverup a 'cabal.'",
+      "witnesses": 4,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "congressional",
+        "AATIP",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r57",
+      "designator": null,
+      "date": "2024-11-13",
+      "date_precision": "day",
+      "time": "20:00",
+      "location": "Picatinny Arsenal, NJ",
+      "lat": 40.96,
+      "lng": -74.53,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "6 weeks",
+      "description": "First NJ mystery drone sighting over Army research facility. Triggered wave of thousands of reports across NJ, NY, CT, PA. FAA restricted airspace. FBI investigated. Never fully explained.",
+      "witnesses": 5000,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "drone-wave",
+        "military",
+        "mass",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r56",
+      "designator": null,
+      "date": "2024-11-14",
+      "date_precision": "day",
+      "time": "00:00",
+      "location": "AARO (FY24 report)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "N/A",
+      "description": "AARO FY2024 report: 757 new cases, total 1,652. 21 cases deemed 'truly anomalous' requiring further investigation. 70% resolved as balloons. 444 lacked sufficient data.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "AARO",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r58",
+      "designator": null,
+      "date": "2024-11-19",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "Senate (Gillibrand hearing)",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "2 hrs",
+      "description": "Senate Armed Services subcommittee hearing led by Sen. Gillibrand on UAP, prompted by AARO FY24 report. Pentagon: no evidence of ET but 21 anomalous cases under review.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "congressional",
+        "AARO",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r59",
+      "designator": null,
+      "date": "2025-01-23",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "US Congress (hearing 3)",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "3 hrs",
+      "description": "House whistleblower hearing. New witness Michael Borland described firsthand experiences and AARO classifying NHI-related info. Called for UAPDA 2025. Described DIA obstruction.",
+      "witnesses": 3,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "congressional",
+        "whistleblower",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "nara-uap-collection",
+      "designator": "NARA UAP Collection",
+      "date": "2025-04-24",
+      "date_precision": "day",
+      "time": null,
+      "location": "National Archives, College Park MD",
+      "lat": 38.99,
+      "lng": -76.94,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "NARA released UAP records transferred from ODNI, OSD, FAA, and the Nuclear Regulatory Commission under the 2024 NDAA. Rolling additions to the UAP Collection. Set NARA_API_KEY to pull individual records.",
+      "witnesses": 1,
+      "source": {
+        "agency": "NARA",
+        "collection": "NARA-UAP",
+        "url": "https://www.archives.gov/uap"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "NARA",
+        "archive",
+        "disclosure"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "hist-r60",
+      "designator": null,
+      "date": "2025-06-09",
+      "date_precision": "day",
+      "time": "10:00",
+      "location": "Capitol Hill (press conf)",
+      "lat": 38.89,
+      "lng": -77.01,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": "1 hr",
+      "description": "Grusch, Reps Luna/Burlison/Moskowitz/Burchett/Perry held press conference. Grusch alleged billions in annual 'slush funds,' DIA obstruction. Lawmakers demanded whistleblower immunity.",
+      "witnesses": 10,
+      "source": {
+        "agency": "Other",
+        "collection": "Historical-Canon",
+        "url": null
+      },
+      "theater": null,
+      "evidence": [
+        "testimony"
+      ],
+      "status": "historical",
+      "tags": [
+        "disclosure",
+        "whistleblower",
+        "congressional",
+        "historical"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t3-ne-orb",
+      "designator": null,
+      "date": "2025-07-15",
+      "date_precision": "day",
+      "time": "22:00",
+      "location": "Northeastern US",
+      "lat": 41.5,
+      "lng": -73.5,
+      "geo_precision": "region",
+      "shape": "orb",
+      "duration": "2 min",
+      "description": "PURSUE Release 3: 'Northeastern Orb Sighting' video shows two bright lights moving in tandem. FBI: witnesses described silent, smooth motion 'as though tethered together.' Captured on iPhone.",
+      "witnesses": 5,
+      "source": {
+        "agency": "FBI",
+        "collection": "PURSUE-T3",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "FBI",
+        "orb",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-fbi-b2",
+      "designator": "FBI photo B2",
+      "date": "2025-12-15",
+      "date_precision": "month",
+      "time": null,
+      "location": "Western United States",
+      "lat": 39.5,
+      "lng": -111.55,
+      "geo_precision": "region",
+      "shape": "other",
+      "duration": null,
+      "description": "PURSUE FBI photo B2: infrared still (black-hot) of an unidentified object over the western US, Dec 2025. AARO flagged a related 'orbs launching orbs' law-enforcement video as 'among the most compelling.'",
+      "witnesses": 3,
+      "source": {
+        "agency": "FBI",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "Western US",
+      "evidence": [
+        "IR",
+        "photo"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "FBI",
+        "IR",
+        "orb"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "nuforc-db",
+      "designator": null,
+      "date": "2026-01-01",
+      "date_precision": "year",
+      "time": null,
+      "location": "United States (NUFORC database)",
+      "lat": 39.0,
+      "lng": -98.0,
+      "geo_precision": "approximate",
+      "shape": "other",
+      "duration": null,
+      "description": "The National UFO Reporting Center maintains 100,000+ civilian sighting reports searchable by date/state/shape. Live scrape pulls recent highlights; full dataset available at nuforc.org.",
+      "witnesses": 1,
+      "source": {
+        "agency": "NUFORC",
+        "collection": "NUFORC",
+        "url": "https://nuforc.org"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "testimony"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "NUFORC",
+        "civilian",
+        "database"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-pr49",
+      "designator": "DOW-UAP-PR49",
+      "date": "2026-05-08",
+      "date_precision": "day",
+      "time": null,
+      "location": "Western US (PR-49)",
+      "lat": 39.5,
+      "lng": -111.55,
+      "geo_precision": "region",
+      "shape": "other",
+      "duration": "109 sec",
+      "description": "Department of the Army infrared video, 1:49, the newest highlighted imagery entry. AARO narrative is descriptive only, drawing no conclusion about the object.",
+      "witnesses": 1,
+      "source": {
+        "agency": "Army",
+        "collection": "PURSUE-T1",
+        "url": "https://www.dvidshub.net/video/1006111/"
+      },
+      "theater": "Western US",
+      "evidence": [
+        "IR",
+        "video"
+      ],
+      "status": "unresolved",
+      "tags": [
+        "PURSUE",
+        "military",
+        "army",
+        "IR",
+        "video"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "pursue-t1-launch",
+      "designator": null,
+      "date": "2026-05-08",
+      "date_precision": "day",
+      "time": null,
+      "location": "PURSUE Release 1 (war.gov)",
+      "lat": 38.87,
+      "lng": -77.04,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "DoD launched PURSUE, releasing 162 files covering 400+ incidents from 1944 to 2026, from FBI/DoD/NASA/State. Hegseth: 'maximum transparency.' Trump: 'have fun and enjoy.'",
+      "witnesses": 1,
+      "source": {
+        "agency": "DoD",
+        "collection": "PURSUE-T1",
+        "url": "https://www.war.gov/UFO/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "PURSUE",
+        "disclosure",
+        "white-house"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    },
+    {
+      "id": "nsa-umbra-2026",
+      "designator": "Umbra FOIA Release",
+      "date": "2026-05-18",
+      "date_precision": "day",
+      "time": null,
+      "location": "NSA (Fort Meade, MD)",
+      "lat": 39.11,
+      "lng": -76.77,
+      "geo_precision": "city",
+      "shape": "other",
+      "duration": null,
+      "description": "NSA released 300+ pages of formerly Top Secret/Umbra UAP records via a Disclosure Foundation FOIA appeal. First time material at that classification level was publicly released for UAP.",
+      "witnesses": 1,
+      "source": {
+        "agency": "NSA",
+        "collection": "NSA-Umbra",
+        "url": "https://www.nsa.gov/Helpful-Links/NSA-FOIA/"
+      },
+      "theater": "US-Domestic",
+      "evidence": [
+        "document"
+      ],
+      "status": "historical",
+      "tags": [
+        "NSA",
+        "umbra",
+        "FOIA",
+        "disclosure"
+      ],
+      "scraped_at": "2026-06-14T22:31:37.012616Z"
+    }
+  ]
+}

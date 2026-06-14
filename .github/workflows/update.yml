@@ -1,0 +1,47 @@
+name: Update UAP Files
+
+# Runs the scraper on a schedule and whenever you push changes to it.
+# When a new PURSUE tranche drops, either:
+#   (a) update scrapers/seeds/pursue.json and push — the Action commits the rebuilt files.json, or
+#   (b) just hit "Run workflow" in the Actions tab to re-pull live sources.
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'      # every Monday at 12:00 UTC
+  workflow_dispatch: {}         # manual "Run workflow" button
+  push:
+    paths:
+      - 'scrapers/**'           # rebuild when scraper or seeds change
+
+permissions:
+  contents: write               # allow the Action to commit files.json back
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run scraper
+        env:
+          NARA_API_KEY: ${{ secrets.NARA_API_KEY }}   # optional, set in repo Settings > Secrets
+        run: python3 scrapers/scrape.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name  "uap-bot"
+          git config user.email "actions@github.com"
+          git add data/files.json data/_report.json
+          if git diff --staged --quiet; then
+            echo "No changes — dataset already current."
+          else
+            git commit -m "chore: refresh UAP files ($(date -u +%Y-%m-%d))"
+            git push
+          fi

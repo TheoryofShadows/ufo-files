@@ -11,7 +11,7 @@
     "fetched": 25,
     "valid": 25,
     "invalid": 0,
-    "secs": 1.08
+    "secs": 0.11
   },
   "nara": {
     "strategy": "API",
@@ -53,6 +53,6 @@
     "fetched": 1,
     "valid": 1,
     "invalid": 0,
-    "secs": 2.51
+    "secs": 1.09
   }
 }

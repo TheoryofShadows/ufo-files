@@ -24,7 +24,7 @@ const AGENCY_COL = {
   NSA: "#818cf8", NASA: "#f472b6", NARA: "#2dd4bf", NUFORC: "#94a3b8",
   DoD: "#fb923c", AARO: "#22d3ee", State: "#34d399", Other: "#7c8aa0",
 };
-const TC = { proximity: "#38bdf8", temporal: "#fbbf24", shape: "#c084fc", pattern: "#fb923c", other: "#7c8aa0" };
+const TC = { proximity: "#38bdf8", temporal: "#fbbf24", shape: "#c084fc", pattern: "#fb923c", semantic: "#34d399", other: "#7c8aa0" };
 const BRIDGE_COL = "#fb7185"; // bridges — the cross-space/time/agency links
 const SEL_COL = "#34d399";
 const HUD = "#22d3ee";
@@ -52,10 +52,11 @@ const STOP_TAGS = new Set(["historical", "PURSUE", "NUFORC", "civilian", "disc",
 const fmtKm = (km) => (km >= 1000 ? (km / 1000).toFixed(1) + "Mm" : Math.round(km) + "km");
 const fmtSpan = (d) => (d >= 365 ? (d / 365).toFixed(d >= 3650 ? 0 : 1) + "yr" : Math.round(d) + "d");
 
-function scorePair(a, b) {
+function scorePair(a, b, sim, shared) {
   const f = [];
   const km = hav(a, b);
   const days = dDays(a.date, b.date);
+  if (sim > 0.16) f.push({ t: "semantic", s: Math.min(0.85, 0.34 + sim * 0.9), concept: true, r: "Semantic match" + (shared && shared.length ? " (" + shared.join(", ") + ")" : "") + " · " + Math.round(sim * 100) + "%" });
   if (km < 80) f.push({ t: "proximity", s: 0.95, concept: false, r: Math.round(km) + "km apart" });
   else if (km < 400) f.push({ t: "proximity", s: Math.max(0.25, 0.65 - (km - 80) * 0.001), concept: false, r: Math.round(km) + "km, same region" });
   if (days < 7) f.push({ t: "temporal", s: 0.92, concept: false, r: Math.round(days) + "d apart, same wave" });
@@ -96,11 +97,16 @@ function scorePair(a, b) {
   return { type: f[0].t, strength: +sc.toFixed(2), bridge, km, days, span: leaps.join(" · "), note };
 }
 
-function buildConnections(db, max) {
+function buildConnections(db, max, vectors) {
   const out = [];
   for (let i = 0; i < db.length; i++)
     for (let j = i + 1; j < db.length; j++) {
-      const r = scorePair(db[i], db[j]);
+      let sim = 0, shared = null;
+      if (vectors) {
+        const A = vectors.vecs.get(db[i].id), B = vectors.vecs.get(db[j].id);
+        if (A && B) { sim = cosV(A, B); if (sim > 0.16) shared = topShared(A, B, vectors.idf); }
+      }
+      const r = scorePair(db[i], db[j], sim, shared);
       // keep strong links, and keep bridges at a lower bar so non-obvious ones surface
       if (r && (r.strength > 0.55 || (r.bridge && r.strength > 0.42)))
         out.push({ from: db[i].id, to: db[j].id, ...r });
@@ -142,6 +148,146 @@ const notability = (r) => {
 };
 
 // ════════════════════════════════════════════════════════════════════════════
+// SEMANTIC ENGINE — TF-IDF vectors over features + tags + description text, so
+// links can be scored by meaning/behavior, not just shape and geography.
+// ════════════════════════════════════════════════════════════════════════════
+const TXT_STOP = new Set("the and was were are has had have been being with from into onto for near over around about above below the that this these those they them then than out off who what when where which while you your our its it is be as at by an or of to in on a i we he she his her had not yes report reported reports sighting sightings object objects craft saw seen see seeing witness witnesses light lights sky night day appeared appear seem seemed looked look like very just also there here some other one two three time times area back came come went going move moving moved across toward towards".split(/\s+/));
+const featLabel = (t) => t.replace(/^f:/, "").replace(/^t:/, "").replace(/^s:/, "").replace(/^th:/, "").replace(/^color:/, "").replace(/-/g, " ");
+
+function tokenize(r) {
+  const toks = [];
+  for (const f of r.features || []) { toks.push("f:" + f); toks.push("f:" + f); } // weight features
+  for (const t of r.tags || []) if (!STOP_TAGS.has(t)) toks.push("t:" + t.toLowerCase());
+  if (r.shape && r.shape !== "other" && r.shape !== "unknown") toks.push("s:" + r.shape);
+  if (r.theater) toks.push("th:" + r.theater.toLowerCase());
+  const words = (r.description || "").toLowerCase().match(/[a-z]{3,}/g) || [];
+  for (const w of words) if (!TXT_STOP.has(w)) toks.push(w);
+  return toks;
+}
+
+function buildVectors(db) {
+  const df = new Map(), docs = new Map();
+  for (const r of db) {
+    const tf = new Map();
+    for (const tok of tokenize(r)) tf.set(tok, (tf.get(tok) || 0) + 1);
+    docs.set(r.id, tf);
+    for (const k of tf.keys()) df.set(k, (df.get(k) || 0) + 1);
+  }
+  const N = db.length || 1, idf = new Map();
+  for (const [k, v] of df) idf.set(k, Math.log((N + 1) / (v + 1)) + 1);
+  const defIdf = Math.log(N + 1) + 1;
+  const mk = (tf) => { const v = new Map(); let n2 = 0; for (const [k, c] of tf) { const w = (1 + Math.log(c)) * (idf.get(k) || defIdf); v.set(k, w); n2 += w * w; } return { v, norm: Math.sqrt(n2) || 1 }; };
+  const vecs = new Map();
+  for (const [id, tf] of docs) vecs.set(id, mk(tf));
+  const vectorize = (r) => { const tf = new Map(); for (const tok of tokenize(r)) tf.set(tok, (tf.get(tok) || 0) + 1); return mk(tf); };
+  return { idf, vecs, vectorize };
+}
+function cosV(a, b) {
+  if (!a || !b) return 0;
+  const [s, l] = a.v.size < b.v.size ? [a, b] : [b, a];
+  let dot = 0; for (const [k, w] of s.v) { const o = l.v.get(k); if (o) dot += w * o; }
+  return dot / (a.norm * b.norm);
+}
+function topShared(a, b, idf, n = 2) {
+  const out = [];
+  for (const [k, w] of a.v) { const o = b.v.get(k); if (o) out.push([k, w + o]); }
+  out.sort((x, y) => y[1] - x[1]);
+  const seen = new Set(), labels = [];
+  for (const [k] of out) { const lb = featLabel(k); if (!seen.has(lb)) { seen.add(lb); labels.push(lb); } if (labels.length >= n) break; }
+  return labels;
+}
+function semanticNeighbors(rec, vectors, byId, k, excludeIds) {
+  const q = vectors.vectorize(rec), out = [];
+  for (const [id, v] of vectors.vecs) {
+    if (id === rec.id || (excludeIds && excludeIds.has(id))) continue;
+    const sim = cosV(q, v); if (sim > 0.12) out.push([id, sim]);
+  }
+  out.sort((a, b) => b[1] - a[1]);
+  return out.slice(0, k).map(([id, sim]) => ({ rec: byId[id], sim })).filter((x) => x.rec);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// HOTSPOTS — grid-accelerated spatial DBSCAN to auto-detect sighting clusters.
+// ════════════════════════════════════════════════════════════════════════════
+function hull(points) { // Andrew's monotone chain on {x:lng,y:lat}
+  if (points.length < 3) return points;
+  const p = [...points].sort((a, b) => a.x - b.x || a.y - b.y);
+  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  const lo = [], hi = [];
+  for (const pt of p) { while (lo.length >= 2 && cross(lo[lo.length - 2], lo[lo.length - 1], pt) <= 0) lo.pop(); lo.push(pt); }
+  for (let i = p.length - 1; i >= 0; i--) { const pt = p[i]; while (hi.length >= 2 && cross(hi[hi.length - 2], hi[hi.length - 1], pt) <= 0) hi.pop(); hi.push(pt); }
+  lo.pop(); hi.pop(); return lo.concat(hi);
+}
+function findHotspots(db, epsKm = 75, minPts = 6) {
+  const cell = epsKm / 111, grid = new Map();
+  const key = (a, b) => a + "," + b;
+  db.forEach((r, i) => { const k = key(Math.floor(r.lat / cell), Math.floor(r.lng / cell)); let a = grid.get(k); if (!a) { a = []; grid.set(k, a); } a.push(i); });
+  const neighbors = (i) => {
+    const r = db[i], ci = Math.floor(r.lat / cell), cj = Math.floor(r.lng / cell), out = [];
+    for (let a = -1; a <= 1; a++) for (let b = -1; b <= 1; b++) {
+      const arr = grid.get(key(ci + a, cj + b)); if (!arr) continue;
+      for (const j of arr) if (j !== i && hav(r, db[j]) <= epsKm) out.push(j);
+    }
+    return out;
+  };
+  const label = new Int32Array(db.length).fill(-2); // -2 unvisited, -1 noise, >=0 cluster
+  let cid = 0;
+  for (let i = 0; i < db.length; i++) {
+    if (label[i] !== -2) continue;
+    const nb = neighbors(i);
+    if (nb.length < minPts) { label[i] = -1; continue; }
+    label[i] = cid; const queue = [...nb];
+    for (let q = 0; q < queue.length; q++) {
+      const j = queue[q];
+      if (label[j] === -1) label[j] = cid;
+      if (label[j] !== -2) continue;
+      label[j] = cid;
+      const nb2 = neighbors(j);
+      if (nb2.length >= minPts) for (const x of nb2) queue.push(x);
+    }
+    cid++;
+  }
+  const clusters = [];
+  for (let c = 0; c < cid; c++) {
+    const members = []; for (let i = 0; i < db.length; i++) if (label[i] === c) members.push(db[i]);
+    if (members.length < minPts) continue;
+    let lat = 0, lng = 0; const shapes = {}, feats = {}; let dmin = "9999", dmax = "0";
+    for (const m of members) {
+      lat += m.lat; lng += m.lng;
+      shapes[m.shape] = (shapes[m.shape] || 0) + 1;
+      for (const f of m.features || []) feats[f] = (feats[f] || 0) + 1;
+      if (m.date < dmin) dmin = m.date; if (m.date > dmax) dmax = m.date;
+    }
+    const topShape = Object.entries(shapes).sort((a, b) => b[1] - a[1])[0][0];
+    const topFeats = Object.entries(feats).filter(([k]) => !k.startsWith("color:")).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([k]) => featLabel(k));
+    clusters.push({
+      id: "hot" + c, count: members.length, lat: lat / members.length, lng: lng / members.length,
+      from: dmin, to: dmax, shape: topShape, feats: topFeats,
+      label: members.map((m) => shortLoc(m.location)).sort((a, b) => members.filter((x) => shortLoc(x.location) === a).length - members.filter((x) => shortLoc(x.location) === b).length).pop(),
+      hull: hull(members.map((m) => ({ x: m.lng, y: m.lat }))),
+      ids: members.map((m) => m.id),
+    });
+  }
+  return clusters.sort((a, b) => b.count - a.count);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// ANOMALY SCORING — rarity of shape + high-strangeness behaviors + evidence.
+// ════════════════════════════════════════════════════════════════════════════
+const STRANGE = { occupants: 26, abduction: 30, "missing-time": 24, radiation: 22, "em-effect": 16, "physical-trace": 16, "craft-retrieval": 28, beam: 12 };
+function anomalyScore(r, shapeFreq, n) {
+  let s = 0;
+  const sf = (shapeFreq[r.shape] || 1) / n;
+  s += Math.min(26, -Math.log(sf) * 7); // rarer shapes score higher
+  for (const f of r.features || []) s += STRANGE[f] || 0;
+  s += Math.min(16, (r.evidence || []).filter((e) => ["radar", "video", "photo", "physical", "IR", "SWIR"].includes(e)).length * 6);
+  s += Math.min(14, Math.log10((r.witnesses || 1) + 1) * 7);
+  if (r.status === "anomalous") s += 14; else if (r.status === "unresolved") s += 6;
+  if (r.source && r.source.agency !== "NUFORC" && r.source.agency !== "Other") s += 8;
+  return Math.min(100, Math.round(s));
+}
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAP — a tactical, pan/pinch-zoomable world canvas with ballistic arcs
 // ════════════════════════════════════════════════════════════════════════════
 const glowCache = {};
@@ -155,9 +301,10 @@ function glowSprite(col) {
   glowCache[col] = c; return c;
 }
 
-function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
+function MapCanvas({ db, cn, sel, onSel, focus, showBridges, hulls }) {
   const cRef = useRef(null), boxRef = useRef(null);
   const [sz, setSz] = useState({ w: 0, h: 0 });
+  const hullRef = useRef(hulls); hullRef.current = hulls;
 
   // mutable refs so pan/zoom + animation never trigger React re-renders
   const view = useRef({ s: 1, tx: 0, ty: 0 });
@@ -211,15 +358,13 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
 
   useEffect(() => {
     if (!focus || !sz.w) return;
-    const r = dataRef.current.find((d) => d.id === focus.id);
-    if (!r) return;
-    const s = Math.max(view.current.s, 3.4);
+    let lat, lng;
+    if (focus.id != null) { const r = dataRef.current.find((d) => d.id === focus.id); if (!r) return; lat = r.lat; lng = r.lng; }
+    else if (focus.lat != null) { lat = focus.lat; lng = focus.lng; }
+    else return;
+    const s = Math.max(view.current.s, focus.s || 3.4);
     const worldW = sz.w * s, worldH = worldW / 2;
-    target.current = clamp({
-      s,
-      tx: sz.w / 2 - ((r.lng + 180) / 360) * worldW,
-      ty: sz.h / 2 - ((90 - r.lat) / 180) * worldH,
-    });
+    target.current = clamp({ s, tx: sz.w / 2 - ((lng + 180) / 360) * worldW, ty: sz.h / 2 - ((90 - lat) / 180) * worldH });
   }, [focus, sz, clamp]);
 
   const zoomAround = useCallback((factor, fx, fy) => {
@@ -315,8 +460,25 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
       const rm = recMapRef.current;
       const pos = (id) => { const d = rm[id]; return d ? P(d.lng, d.lat) : null; };
 
-      // faint static web of every link
-      for (const c of conns) {
+      // hotspot footprints (convex hulls), drawn beneath the network
+      const hl = hullRef.current;
+      if (hl) {
+        const pulse = 0.16 + 0.07 * (0.5 + 0.5 * Math.sin(t * 1.6));
+        for (const h of hl) {
+          if (!h.hull || h.hull.length < 3) continue;
+          g.beginPath();
+          for (let i = 0; i < h.hull.length; i++) { const p = P(h.hull[i].x, h.hull[i].y); if (i === 0) g.moveTo(p.x, p.y); else g.lineTo(p.x, p.y); }
+          g.closePath();
+          g.fillStyle = "rgba(34,211,238," + pulse + ")"; g.fill();
+          g.strokeStyle = "rgba(34,211,238,.7)"; g.lineWidth = 1.2; g.shadowBlur = 6; g.shadowColor = "rgba(34,211,238,.6)"; g.stroke(); g.shadowBlur = 0;
+          const c = P(h.lng, h.lat);
+          g.fillStyle = HUD; g.font = "600 9px 'DM Mono', monospace"; g.textAlign = "center"; g.textBaseline = "middle";
+          g.fillText(String(h.count), c.x, c.y);
+        }
+      }
+
+      // faint static web of every link (hidden on the hotspots view)
+      for (const c of (hl ? [] : conns)) {
         if (onlyBr && !c.bridge) continue;
         const a = pos(c.from), b = pos(c.to); if (!a || !b) continue;
         if (s === c.from || s === c.to) continue;
@@ -332,6 +494,7 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
         const hot = s === c.from || s === c.to;
         if (!(c.bridge || hot)) continue;
         if (onlyBr && !c.bridge && !hot) continue;
+        if (hl && !hot) continue; // hotspots view: only selection arcs
         const a = pos(c.from), b = pos(c.to); if (!a || !b) continue;
         const cc = ctrl(a, b);
         const col = hot ? SEL_COL : c.bridge ? BRIDGE_COL : (TC[c.type] || TC.other);
@@ -523,8 +686,21 @@ function Token({ col, glyph }) {
   );
 }
 
-function SRow({ s, sel, onTap, cc, bc }) {
+function Bar({ v, col, label }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <span style={{ fontSize: 7.5, color: "#5b7186", width: 58, letterSpacing: "0.08em" }}>{label}</span>
+      <div style={{ flex: 1, height: 3, background: "#0e1622", borderRadius: 2, overflow: "hidden" }}>
+        <div style={{ width: v + "%", height: "100%", background: "linear-gradient(90deg," + col + "55," + col + ")", borderRadius: 2 }} />
+      </div>
+      <span style={{ fontSize: 7.5, color: col, width: 22, textAlign: "right" }}>{Math.round(v)}</span>
+    </div>
+  );
+}
+
+function SRow({ s, sel, onTap, cc, bc, intel, score }) {
   const col = agencyColor(s);
+  const aCol = score >= 60 ? "#f87171" : score >= 35 ? "#fbbf24" : "#7c8aa0";
   return (
     <div onClick={() => onTap(s.id)} style={{ padding: "13px 16px", borderBottom: "1px solid #0b0f18", background: sel ? "linear-gradient(90deg, rgba(52,211,153,.06), transparent)" : "transparent", borderLeft: "2px solid " + (sel ? SEL_COL : "transparent"), cursor: "pointer" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 11 }}>
@@ -536,6 +712,7 @@ function SRow({ s, sel, onTap, cc, bc }) {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
           {s.source && s.source.agency !== "Other" && <span style={{ fontSize: 7.5, padding: "2px 6px", borderRadius: 4, background: col + "1a", color: col, letterSpacing: "0.05em" }}>{s.source.agency}</span>}
           <div style={{ display: "flex", gap: 4 }}>
+            {score != null && <span style={{ fontSize: 7.5, padding: "2px 5px", borderRadius: 4, background: aCol + "1f", color: aCol }} title="anomaly score">{"⚠"}{score}</span>}
             {bc > 0 && <span style={{ fontSize: 7.5, padding: "2px 5px", borderRadius: 4, background: BRIDGE_COL + "1a", color: BRIDGE_COL }} title="bridge links">{"✧"}{bc}</span>}
             {cc > 0 && <span style={{ fontSize: 7.5, padding: "2px 5px", borderRadius: 4, background: "#fb923c18", color: "#fb923c" }} title="total links">{"⌁"}{cc}</span>}
           </div>
@@ -545,9 +722,31 @@ function SRow({ s, sel, onTap, cc, bc }) {
         <div style={{ paddingLeft: 41, marginTop: 11 }}>
           <p style={{ fontSize: 13.5, color: "#9fb0c4", lineHeight: 1.7, fontFamily: "var(--s)", margin: 0 }}>{s.description}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 11 }}>
+            {(s.features || []).map((f) => <span key={f} style={{ fontSize: 7.5, padding: "3px 7px", borderRadius: 4, background: "rgba(34,211,238,.08)", color: HUD, letterSpacing: "0.04em" }}>{featLabel(f)}</span>)}
             {(s.evidence || []).map((e) => <span key={e} style={{ fontSize: 7.5, padding: "3px 7px", borderRadius: 4, background: "#0d1623", color: "#7c8aa0", textTransform: "uppercase", letterSpacing: "0.06em" }}>{e}</span>)}
-            {s.status && <span style={{ fontSize: 7.5, padding: "3px 7px", borderRadius: 4, background: "#0d1623", color: HUD, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.status}</span>}
+            {s.status && <span style={{ fontSize: 7.5, padding: "3px 7px", borderRadius: 4, background: "#0d1623", color: "#a3a3a3", textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.status}</span>}
           </div>
+          {intel && (
+            <div style={{ marginTop: 12, padding: "10px 11px", borderRadius: 8, background: "rgba(7,13,23,.6)", border: "1px solid #14202f" }}>
+              <div style={{ fontSize: 7, color: HUD, letterSpacing: "0.18em", marginBottom: 8 }}>{"◈ INTEL"}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                <Bar v={intel.anomaly} col={intel.anomaly >= 60 ? "#f87171" : intel.anomaly >= 35 ? "#fbbf24" : "#7c8aa0"} label="ANOMALY" />
+              </div>
+              {intel.hotspot && <div style={{ fontSize: 9.5, color: "#9fb0c4", marginTop: 9 }}>{"⬡ "}<span style={{ color: "#e2e8f0" }}>{intel.hotspot.label}</span> hotspot · {intel.hotspot.count} sightings</div>}
+              {intel.similar.length > 0 && (
+                <div style={{ marginTop: 9 }}>
+                  <div style={{ fontSize: 7, color: "#5b7186", letterSpacing: "0.14em", marginBottom: 5 }}>MOST SIMILAR (SEMANTIC)</div>
+                  {intel.similar.map(({ rec, sim }) => (
+                    <div key={rec.id} onClick={(e) => { e.stopPropagation(); onTap(rec.id); }} style={{ display: "flex", alignItems: "center", gap: 7, padding: "4px 0", cursor: "pointer" }}>
+                      <span style={{ fontSize: 11, color: agencyColor(rec), width: 13, textAlign: "center" }}>{IC[rec.shape] || "✦"}</span>
+                      <span style={{ flex: 1, minWidth: 0, fontSize: 10.5, color: "#cbd5e1", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{shortLoc(rec.location)} <span style={{ color: "#3a455c" }}>· {rec.date.slice(0, 4)}</span></span>
+                      <span style={{ fontSize: 8, color: SEL_COL }}>{Math.round(sim * 100)}%</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
           {s.source && s.source.url && <a href={s.source.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ display: "inline-block", marginTop: 11, fontSize: 9.5, color: SEL_COL, textDecoration: "none", letterSpacing: "0.04em" }}>{"↗ "}{s.source.collection} source</a>}
         </div>
       )}
@@ -588,6 +787,21 @@ function Stat({ n, label, col }) {
   );
 }
 
+function HotspotRow({ h, onTap }) {
+  return (
+    <div onClick={() => onTap(h)} style={{ padding: "13px 16px", borderBottom: "1px solid #0b0f18", cursor: "pointer" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <span style={{ width: 34, height: 34, flexShrink: 0, borderRadius: 9, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 500, color: HUD, background: "rgba(34,211,238,.1)", border: "1px solid rgba(34,211,238,.3)" }}>{h.count}</span>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 13, color: "#e2e8f0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{h.label} <span style={{ color: "#3a455c", fontSize: 10 }}>hotspot</span></div>
+          <div style={{ fontSize: 9.5, color: "#4a5a70", marginTop: 2 }}>{h.from.slice(0, 4)}–{h.to.slice(0, 4)} · {IC[h.shape] || "✦"} {h.shape}{h.feats.length ? " · " + h.feats.join(", ") : ""}</div>
+        </div>
+        <span style={{ fontSize: 14, color: "#44566e" }}>{"⟶"}</span>
+      </div>
+    </div>
+  );
+}
+
 // ════════════════════════════════════════════════════════════════════════════
 // APP
 // ════════════════════════════════════════════════════════════════════════════
@@ -621,10 +835,17 @@ export default function App() {
     if (data.length <= WORK_CAP) return data;
     return [...data].sort((a, b) => notability(b) - notability(a)).slice(0, WORK_CAP);
   }, [data]);
-  // bridges (cross-domain) come from the notable set; clusters (local waves) from
-  // the full data. Merge, dedupe by pair, rank bridges up — distinct tabs, one map.
-  const bridgeConns = useMemo(() => buildConnections(work, 200), [work]);
+  // semantic vectors over the notable working set power bridges + "most similar"
+  const vectors = useMemo(() => buildVectors(work), [work]);
+  // bridges (cross-domain, now semantic-aware) from the notable set; clusters
+  // (local waves) from the full data. Merge, dedupe, rank bridges up.
+  const bridgeConns = useMemo(() => buildConnections(work, 200, vectors), [work, vectors]);
   const clusters = useMemo(() => buildClusters(data, 220), [data]);
+  const hotspots = useMemo(() => (data.length ? findHotspots(data, 28, 7) : []), [data]);
+  const hotspotOf = useMemo(() => { const m = {}; hotspots.forEach((h) => h.ids.forEach((id) => { if (!m[id]) m[id] = h; })); return m; }, [hotspots]);
+  const shapeFreq = useMemo(() => { const m = {}; data.forEach((d) => { m[d.shape] = (m[d.shape] || 0) + 1; }); return m; }, [data]);
+  const anomalyOf = useMemo(() => { const m = {}; const n = data.length || 1; data.forEach((d) => { m[d.id] = anomalyScore(d, shapeFreq, n); }); return m; }, [data, shapeFreq]);
+  const anomalies = useMemo(() => [...data].sort((a, b) => anomalyOf[b.id] - anomalyOf[a.id]).slice(0, 300), [data, anomalyOf]);
   const conns = useMemo(() => {
     const seen = new Set(), all = [];
     for (const c of [...bridgeConns, ...clusters]) {
@@ -645,7 +866,7 @@ export default function App() {
     if (agency !== "all") r = r.filter((s) => s.source && s.source.agency === agency);
     if (search) {
       const q = search.toLowerCase();
-      r = r.filter((s) => s.location.toLowerCase().includes(q) || s.date.includes(q) || s.shape.includes(q) || (s.designator || "").toLowerCase().includes(q) || (s.tags || []).some((t) => t.includes(q)) || s.description.toLowerCase().includes(q));
+      r = r.filter((s) => s.location.toLowerCase().includes(q) || s.date.includes(q) || s.shape.includes(q) || (s.designator || "").toLowerCase().includes(q) || (s.tags || []).some((t) => t.includes(q)) || (s.features || []).some((f) => f.includes(q)) || s.description.toLowerCase().includes(q));
     }
     return r;
   }, [data, search, agency]);
@@ -653,13 +874,19 @@ export default function App() {
   const visibleIds = useMemo(() => new Set(filtered.map((s) => s.id)), [filtered]);
   const mapConns = useMemo(() => conns.filter((c) => visibleIds.has(c.from) && visibleIds.has(c.to)), [conns, visibleIds]);
 
+  const intel = useMemo(() => {
+    if (!sel) return null; const rec = byId[sel]; if (!rec) return null;
+    return { anomaly: anomalyOf[sel] || 0, hotspot: hotspotOf[sel] || null, similar: semanticNeighbors(rec, vectors, byId, 4) };
+  }, [sel, byId, anomalyOf, hotspotOf, vectors]);
+
   const select = useCallback((id) => { setSel(id); }, []);
   const locate = useCallback((id) => { setSel(id); if (id) setFocus({ id, n: Date.now() }); }, []);
+  const locateHot = useCallback((h) => { setSel(null); setFocus({ lat: h.lat, lng: h.lng, s: 4, n: Date.now() }); }, []);
 
   if (!ready) return <div style={{ height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: "#04070e", color: SEL_COL, fontFamily: "monospace", fontSize: 11, letterSpacing: "0.3em" }}>ACQUIRING SIGNAL{"…"}</div>;
 
   const showBridges = tab === "bridges";
-  const tabs = [["files", filtered.length], ["connections", conns.length], ["bridges", bridges.length]];
+  const tabs = [["files", filtered.length], ["links", conns.length], ["bridges", bridges.length], ["hotspots", hotspots.length], ["anomalies", anomalies.length]];
 
   return (
     <>
@@ -688,7 +915,7 @@ export default function App() {
           </div>
         </header>
 
-        {data.length > 0 && <MapCanvas db={filtered} cn={mapConns} sel={sel} onSel={select} focus={focus} showBridges={showBridges} />}
+        {data.length > 0 && <MapCanvas db={filtered} cn={mapConns} sel={sel} onSel={select} focus={focus} showBridges={showBridges} hulls={tab === "hotspots" ? hotspots : null} />}
 
         <div style={{ display: "flex", borderBottom: "1px solid #10202e", background: "linear-gradient(180deg, rgba(13,22,35,.5), transparent)" }}>
           <Stat n={data.length} label="FILES" col="#e2e8f0" />
@@ -716,30 +943,43 @@ export default function App() {
           })}
         </div>
 
-        <nav style={{ display: "flex", position: "sticky", top: 49, zIndex: 40, background: "rgba(7,11,19,.92)", backdropFilter: "blur(14px)", borderBottom: "1px solid #10202e" }}>
+        <nav style={{ display: "flex", position: "sticky", top: 49, zIndex: 40, background: "rgba(7,11,19,.92)", backdropFilter: "blur(14px)", borderBottom: "1px solid #10202e", overflowX: "auto" }}>
           {tabs.map(([t, n]) => {
-            const on = tab === t; const c = t === "bridges" ? BRIDGE_COL : SEL_COL;
-            return <button key={t} onClick={() => setTab(t)} style={{ flex: 1, padding: "13px 0", fontSize: 9.5, letterSpacing: "0.12em", textTransform: "uppercase", background: "transparent", border: "none", fontFamily: "var(--f)", borderBottom: "2px solid " + (on ? c : "transparent"), color: on ? c : "#4a5a70", textShadow: on ? "0 0 10px " + c + "66" : "none" }}>{t} <span style={{ opacity: 0.6 }}>{n}</span></button>;
+            const on = tab === t; const c = t === "bridges" ? BRIDGE_COL : t === "anomalies" ? "#f87171" : t === "hotspots" ? HUD : SEL_COL;
+            return <button key={t} onClick={() => { setTab(t); }} style={{ flex: "1 0 auto", padding: "13px 13px", fontSize: 9.5, letterSpacing: "0.1em", textTransform: "uppercase", background: "transparent", border: "none", fontFamily: "var(--f)", borderBottom: "2px solid " + (on ? c : "transparent"), color: on ? c : "#4a5a70", textShadow: on ? "0 0 10px " + c + "66" : "none", whiteSpace: "nowrap" }}>{t} <span style={{ opacity: 0.6 }}>{n}</span></button>;
           })}
         </nav>
 
         {tab === "bridges" && (
           <div style={{ padding: "12px 16px", borderBottom: "1px solid #10202e", background: "linear-gradient(180deg, rgba(251,113,133,.06), transparent)", fontSize: 11.5, color: "#9fb0c4", lineHeight: 1.65, fontFamily: "var(--s)" }}>
-            <span style={{ color: BRIDGE_COL, fontFamily: "var(--f)", fontSize: 9, letterSpacing: "0.1em" }}>{"✧ BRIDGES"}</span> — non-obvious links between events separated by thousands of km, decades, or agency silos, yet sharing a craft taxonomy, theater, or signature. The connections nobody filed together.
+            <span style={{ color: BRIDGE_COL, fontFamily: "var(--f)", fontSize: 9, letterSpacing: "0.1em" }}>{"✧ BRIDGES"}</span> — non-obvious links across distance, decades, and agency silos, now scored by <span style={{ color: SEL_COL }}>semantic similarity</span> of the reports themselves, not just shape and place.
+          </div>
+        )}
+        {tab === "hotspots" && (
+          <div style={{ padding: "12px 16px", borderBottom: "1px solid #10202e", background: "linear-gradient(180deg, rgba(34,211,238,.06), transparent)", fontSize: 11.5, color: "#9fb0c4", lineHeight: 1.65, fontFamily: "var(--s)" }}>
+            <span style={{ color: HUD, fontFamily: "var(--f)", fontSize: 9, letterSpacing: "0.1em" }}>{"⬡ HOTSPOTS"}</span> — density clusters found by spatial DBSCAN. Tap to fly there; the cluster footprint is drawn on the map.
+          </div>
+        )}
+        {tab === "anomalies" && (
+          <div style={{ padding: "12px 16px", borderBottom: "1px solid #10202e", background: "linear-gradient(180deg, rgba(248,113,113,.06), transparent)", fontSize: 11.5, color: "#9fb0c4", lineHeight: 1.65, fontFamily: "var(--s)" }}>
+            <span style={{ color: "#f87171", fontFamily: "var(--f)", fontSize: 9, letterSpacing: "0.1em" }}>{"⚠ ANOMALIES"}</span> — ranked by rarity of shape plus high-strangeness signals (occupants, missing time, radiation, EM, physical traces) and hard evidence.
           </div>
         )}
 
         <div style={{ paddingBottom: "calc(48px + env(safe-area-inset-bottom))" }}>
-          {tab === "files" && filtered.slice(0, 400).map((s) => <SRow key={s.id} s={s} sel={sel === s.id} onTap={locate} cc={linkCount[s.id] || 0} bc={bridgeCount[s.id] || 0} />)}
+          {tab === "files" && filtered.slice(0, 400).map((s) => <SRow key={s.id} s={s} sel={sel === s.id} onTap={locate} cc={linkCount[s.id] || 0} bc={bridgeCount[s.id] || 0} intel={sel === s.id ? intel : null} />)}
           {tab === "files" && filtered.length > 400 && <div style={{ padding: "16px", textAlign: "center", color: "#5b7186", fontSize: 9.5, letterSpacing: "0.08em" }}>SHOWING 400 OF {filtered.length.toLocaleString()} · REFINE WITH SEARCH OR FILTERS</div>}
           {tab === "files" && filtered.length === 0 && <div style={{ padding: 48, textAlign: "center", color: "#3a4a60", fontSize: 11, letterSpacing: "0.1em" }}>NO MATCHES</div>}
-          {tab === "connections" && conns.map((c) => <CRow key={c.id} c={c} byId={byId} hi={sel === c.from || sel === c.to} onTap={locate} />)}
+          {tab === "links" && conns.map((c) => <CRow key={c.id} c={c} byId={byId} hi={sel === c.from || sel === c.to} onTap={locate} />)}
           {tab === "bridges" && bridges.map((c) => <CRow key={c.id} c={c} byId={byId} hi={sel === c.from || sel === c.to} onTap={locate} />)}
           {tab === "bridges" && bridges.length === 0 && <div style={{ padding: 48, textAlign: "center", color: "#3a4a60", fontSize: 11 }}>No bridges in current view.</div>}
+          {tab === "hotspots" && hotspots.map((h) => <HotspotRow key={h.id} h={h} onTap={locateHot} />)}
+          {tab === "hotspots" && hotspots.length === 0 && <div style={{ padding: 48, textAlign: "center", color: "#3a4a60", fontSize: 11 }}>No clusters detected.</div>}
+          {tab === "anomalies" && anomalies.slice(0, 400).map((s) => <SRow key={s.id} s={s} sel={sel === s.id} onTap={locate} cc={linkCount[s.id] || 0} bc={bridgeCount[s.id] || 0} intel={sel === s.id ? intel : null} score={anomalyOf[s.id] || 0} />)}
         </div>
 
         <footer style={{ padding: "12px 16px", borderTop: "1px solid #10202e", fontSize: 7, color: "#3a4a60", letterSpacing: "0.12em", textAlign: "center" }}>
-          {meta && meta.generated_at ? "DATA " + meta.generated_at.slice(0, 10) : ""} · ALGORITHM-COMPUTED · {conns.length} LINKS / {bridges.length} BRIDGES
+          {meta && meta.generated_at ? "DATA " + meta.generated_at.slice(0, 10) : ""} · SEMANTIC + DBSCAN + ANOMALY · {hotspots.length} HOTSPOTS
         </footer>
       </div>
     </>

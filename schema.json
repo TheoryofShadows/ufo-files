@@ -85,6 +85,12 @@
       "items": { "type": "string" },
       "default": []
     },
+    "features": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "NLP-mined structured signals from the description (e.g. 'hover', 'em-effect', 'occupants', 'silent', 'color:white'). Added by the scraper's enrich() step; powers the app's semantic link engine, anomaly scoring, and feature filters."
+    },
     "scraped_at": {
       "type": "string",
       "format": "date-time",

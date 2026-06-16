@@ -135,6 +135,31 @@ NARA_API_KEY=xxx python3 scrape.py --only nara   # NARA live (key: catalog.archi
 2. (Optional) Add `NARA_API_KEY` under Settings → Secrets → Actions.
 3. The Action self-commits — no other infra needed.
 
+## The intelligence layer
+
+Beyond raw geography, the app reasons about the reports themselves:
+
+- **NLP feature extraction (pipeline).** `enrich()` mines every description for
+  ~40 structured signals — motion (`hover`, `high-speed`, `erratic`, `formation`,
+  `silent`), physical/EM effects (`em-effect`, `radiation`, `physical-trace`,
+  `beam`, `missing-time`), craft traits (`metallic`, `pulsing`, `rotating`),
+  entities (`occupants`, `abduction`), context (`military-context`, `aviation`,
+  `water`, `mass-sighting`) and colors. Stored on each record as `features`.
+- **Semantic link engine (app).** Each report becomes a TF-IDF vector over its
+  features + tags + description text. Bridges are scored by cosine similarity, so
+  the app links events by *behavior and meaning* (e.g. "rotating pulsing lights",
+  "engine failure + EM") across continents and decades — and every file shows its
+  **most semantically similar** counterparts.
+- **Hotspots (app).** A grid-accelerated spatial **DBSCAN** auto-detects sighting
+  clusters; the map draws each cluster's convex-hull footprint and a Hotspots
+  view ranks them by density.
+- **Anomaly ranking (app).** Every report gets a 0–100 score from shape rarity,
+  high-strangeness features, hard evidence (radar/video/physical), witnesses and
+  adjudication status — surfaced as an Anomalies view and an Intel readout.
+
+All of it is deterministic and dependency-free (no external AI services), and it
+recomputes over whatever the pipeline produces.
+
 ## The connection engine, in detail
 
 Every pair of files is scored, and the strongest links surface. Each link carries

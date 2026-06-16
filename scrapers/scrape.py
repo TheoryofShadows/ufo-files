@@ -361,6 +361,69 @@ def validate(rec):
     return problems
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# NLP enrichment — mine free-text descriptions into structured feature tags.
+# These features feed the app's semantic link engine, anomaly scoring, and
+# filters. Pure keyword/regex mining: deterministic, dependency-free, fast.
+# ─────────────────────────────────────────────────────────────────────────────
+import re as _re
+
+FEATURE_PATTERNS = {
+    # motion / flight behavior
+    "hover": r"hover|stationary|motionless|hung|suspended|hovering",
+    "high-speed": r"high speed|incredible speed|tremendous speed|shot (?:off|up|away)|rapid|sped|streaked|blazing|mph|knots|warp",
+    "erratic": r"erratic|zigzag|zig-zag|darted|darting|jerk|abrupt|right angle|right-angle|bounced|wobbl",
+    "ascend": r"ascend|shot up|rose|rising|climbed|went straight up|upward",
+    "descend": r"descend|dropped|descending|came down|lowered|plummet",
+    "formation": r"formation|in a line|v-shape|v shape|cluster of|group of|multiple craft|fleet|squadron",
+    "silent": r"silent|no sound|without (?:a )?sound|noiseless|completely quiet|eerily quiet",
+    # physical / EM effects
+    "em-effect": r"engine (?:died|stalled|stopped)|electrical|interference|radio (?:went|cut)|power (?:out|fail)|electronics|car (?:died|stalled)|emp",
+    "radiation": r"radiation|radioactive|burns|burned|geiger|irradiat",
+    "physical-trace": r"trace|scorch|burn mark|landing (?:mark|ring)|imprint|flattened|residue|soil|melted|molten",
+    "beam": r"beam|ray of light|shaft of light|spotlight|projected light|light beam",
+    "missing-time": r"missing time|lost time|time (?:loss|gap)|couldn'?t account|hours? (?:were )?missing",
+    "sound": r"hum|buzz|whir|roar|loud (?:noise|sound)|whoosh|pulsating sound|low frequency",
+    # craft characteristics
+    "lights": r"\blights?\b|illuminat|glowing|luminous|brightly lit|flashing",
+    "pulsing": r"puls|throb|flicker|blink|strob",
+    "rotating": r"rotat|spinning|spun|revolv",
+    "metallic": r"metallic|metal|chrome|aluminum|steel|reflective|shiny|silver",
+    # entities / extraordinary
+    "occupants": r"occupant|being|entity|entities|humanoid|figure|creature|alien|gray |grey |little men",
+    "abduction": r"abduct|taken aboard|onboard|examined|paralyz|levitat",
+    "craft-retrieval": r"crash|retriev|recover|wreckage|debris field|salvage",
+    # context / witnesses
+    "military-context": r"\bmilitary\b|air ?force|navy|army|jet|fighter|scramble|radar|base|pilot|aircraft|nuclear|missile",
+    "police-context": r"police|officer|sheriff|deputy|patrol|law enforcement",
+    "aviation": r"pilot|airliner|airport|cockpit|control tower|faa|airspace|flight crew",
+    "water": r"ocean|sea|lake|water|underwater|submerg|river|harbor|coast",
+    "mass-sighting": r"hundreds|thousands|dozens|many (?:people|witnesses)|crowd|widely (?:seen|reported)|mass",
+}
+_COLORS = ["red", "orange", "yellow", "green", "blue", "white", "amber", "golden", "purple", "multicolored", "multi-colored"]
+_COMPILED = {k: _re.compile(v, _re.I) for k, v in FEATURE_PATTERNS.items()}
+
+
+def enrich(rec):
+    """Attach a `features` list mined from the record's text + existing tags."""
+    text = " ".join(str(rec.get(f, "")) for f in ("description", "location")) + " " + " ".join(rec.get("tags", []))
+    tl = text.lower()
+    feats = set()
+    for name, rx in _COMPILED.items():
+        if rx.search(tl):
+            feats.add(name)
+    cols = [c for c in _COLORS if _re.search(r"\b" + _re.escape(c) + r"\b", tl)]
+    for c in cols[:3]:
+        feats.add("color:" + c.replace("multi-colored", "multicolored"))
+    # promote evidence + shape family into the feature space too
+    if rec.get("evidence"):
+        for e in rec["evidence"]:
+            if e in ("video", "photo", "radar", "IR", "SWIR", "physical"):
+                feats.add("evidence:" + e.lower())
+    rec["features"] = sorted(feats)
+    return rec
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="run a single source")
@@ -404,8 +467,13 @@ def main():
         seen.add(r["id"])
         merged.append(r)
 
+    # NLP enrichment: mine structured features from every record's text
+    for r in merged:
+        enrich(r)
+    feat_total = sum(len(r.get("features", [])) for r in merged)
+
     merged.sort(key=lambda r: r["date"])
-    out = {"generated_at": NOW, "count": len(merged),
+    out = {"generated_at": NOW, "count": len(merged), "features_extracted": feat_total,
            "sources": list(report.keys()), "records": merged}
     (DATA / "files.json").write_text(json.dumps(out, indent=2))
     (DATA / "_report.json").write_text(json.dumps(report, indent=2))

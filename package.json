@@ -5,10 +5,13 @@
   "type": "module",
   "description": "SIGINT — a pipeline-fed UAP/UFO files app with a ballistic world map and algorithm-computed bridge connections.",
   "scripts": {
+    "predev": "node tools/sync-data.cjs",
     "dev": "vite",
+    "prebuild": "node tools/sync-data.cjs",
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "data": "cd scrapers && python3 scrape.py",
+    "sync": "node tools/sync-data.cjs",
     "shot": "node tools/screenshot.cjs"
   },
   "dependencies": {

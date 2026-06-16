@@ -1,14 +1,19 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { LAND } from "./world.js";
-import snapshot from "../data/files.json";
+import bootstrap from "./bootstrap.json";
 
 // ════════════════════════════════════════════════════════════════════════════
 // DATA
-// The dataset is produced by the scraper pipeline (data/files.json) and bundled
-// at build time as the offline snapshot. Set DATA_URL to a hosted files.json to
-// fetch the latest on load (falls back to the bundled snapshot on failure).
+// The full archive (data/files.json) can run to tens of thousands of records, so
+// it is served statically and fetched at runtime. A small curated bootstrap is
+// bundled for instant, offline-capable first paint; the full set swaps in once
+// fetched. Override DATA_URL to point at a hosted files.json instead.
 // ════════════════════════════════════════════════════════════════════════════
-const DATA_URL = null; // e.g. "https://raw.githubusercontent.com/YOU/uap-files/main/data/files.json"
+const BASE = (import.meta && import.meta.env && import.meta.env.BASE_URL) || "/";
+const DATA_URL = BASE + "files.json";
+// Cap the O(n²) connection engine to the most notable records so it stays fast
+// no matter how large the archive grows. Every record still renders + is searchable.
+const WORK_CAP = 1400;
 
 // ════════════════════════════════════════════════════════════════════════════
 // PALETTE
@@ -105,6 +110,37 @@ function buildConnections(db, max) {
   return out.slice(0, max || 120).map((c, i) => ({ ...c, id: "auto" + i }));
 }
 
+// Local "wave" finder — proximity/temporal clusters across the FULL dataset.
+// Sorting by date lets us slide a short time window, so this stays near-linear
+// even at thousands of records (vs the O(n²) bridge pass on the notable set).
+function buildClusters(db, max) {
+  const s = [...db].sort((a, b) => (a.date < b.date ? -1 : 1));
+  const out = [];
+  for (let i = 0; i < s.length; i++) {
+    for (let j = i + 1; j < s.length && j < i + 1600; j++) {
+      if (dDays(s[i].date, s[j].date) > 21) break;       // window closed
+      if (hav(s[i], s[j]) > 160) continue;               // not local
+      const r = scorePair(s[i], s[j]);
+      if (r && !r.bridge && r.strength > 0.6) out.push({ from: s[i].id, to: s[j].id, ...r });
+    }
+  }
+  out.sort((a, b) => b.strength - a.strength);
+  return out.slice(0, max || 200);
+}
+
+// notability score — used to pick the working set the connection engine runs on
+const DISTINCT = new Set(["disc", "triangle", "cigar", "chevron", "boomerang", "diamond"]);
+const notability = (r) => {
+  let s = 0;
+  const ag = r.source && r.source.agency;
+  if (ag && ag !== "NUFORC" && ag !== "Other") s += 1000;
+  if (r.designator) s += 200;
+  if (DISTINCT.has(r.shape)) s += 60;
+  s += Math.min(60, Math.log10((r.witnesses || 1) + 1) * 24);
+  s += Math.min(40, (r.description || "").length / 12);
+  return s;
+};
+
 // ════════════════════════════════════════════════════════════════════════════
 // MAP — a tactical, pan/pinch-zoomable world canvas with ballistic arcs
 // ════════════════════════════════════════════════════════════════════════════
@@ -128,6 +164,16 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
   const target = useRef(null);
   const dataRef = useRef(db), connRef = useRef(cn), selRef = useRef(sel), brRef = useRef(showBridges);
   dataRef.current = db; connRef.current = cn; selRef.current = sel; brRef.current = showBridges;
+  const recMap = useMemo(() => { const m = {}; for (const d of db) m[d.id] = d; return m; }, [db]);
+  const recMapRef = useRef(recMap); recMapRef.current = recMap;
+  // precomputed geometry (normalized coords + color) so the per-frame node loop
+  // does no allocation or string work — essential at thousands of nodes
+  const geom = useMemo(() => {
+    const n = db.length, nx = new Float64Array(n), ny = new Float64Array(n), col = new Array(n);
+    for (let i = 0; i < n; i++) { const d = db[i]; nx[i] = (d.lng + 180) / 360; ny[i] = (90 - d.lat) / 180; col[i] = agencyColor(d); }
+    return { nx, ny, col, ids: db.map((d) => d.id) };
+  }, [db]);
+  const geomRef = useRef(geom); geomRef.current = geom;
   const ptrs = useRef(new Map());
   const drag = useRef(null);
   const initedFor = useRef(0);
@@ -186,9 +232,12 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
   useEffect(() => {
     const cv = cRef.current; if (!cv || !sz.w) return;
     const g = cv.getContext("2d");
-    const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     cv.width = sz.w * dpr; cv.height = sz.h * dpr;
     let raf;
+    const sgc = document.createElement("canvas"); sgc.width = cv.width; sgc.height = cv.height;
+    const sgx = sgc.getContext("2d");
+    let lastSig = "";
 
     const bez = (a, c, b, t) => {
       const u = 1 - t;
@@ -203,6 +252,48 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
       return { x: mx + nx * bulge, y: my + ny * bulge };
     };
 
+    // static map layer (bg + graticule + coastlines) — repainted only when the
+    // view changes, then blitted each frame so animation stays cheap at any scale
+    const paintStatic = (c, v, W, H) => {
+      c.setTransform(dpr, 0, 0, dpr, 0, 0);
+      c.clearRect(0, 0, W, H);
+      const bg = c.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.9);
+      bg.addColorStop(0, "#0a1320"); bg.addColorStop(0.6, "#070d17"); bg.addColorStop(1, "#04070e");
+      c.fillStyle = bg; c.fillRect(0, 0, W, H);
+      const P = (lng, lat) => project(lng, lat, v);
+      c.lineWidth = 0.5; c.setLineDash([1, 5]); c.lineCap = "round";
+      for (let lng = -180; lng <= 180; lng += 30) {
+        const a = P(lng, 88), b = P(lng, -88);
+        c.strokeStyle = "rgba(56,189,248,.07)";
+        c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke();
+      }
+      for (let lat = -60; lat <= 60; lat += 30) {
+        const a = P(-180, lat), b = P(180, lat);
+        c.strokeStyle = lat === 0 ? "rgba(56,189,248,.16)" : "rgba(56,189,248,.07)";
+        c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke();
+      }
+      c.setLineDash([]);
+      for (const poly of LAND) {
+        let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
+        c.beginPath();
+        for (let i = 0; i < poly.length; i++) {
+          const p = P(poly[i][0], poly[i][1]);
+          if (i === 0) c.moveTo(p.x, p.y); else c.lineTo(p.x, p.y);
+          if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
+          if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
+        }
+        if (maxX < -5 || minX > W + 5 || maxY < -5 || minY > H + 5) continue;
+        c.closePath();
+        const lg = c.createLinearGradient(0, minY, 0, maxY || minY + 1);
+        lg.addColorStop(0, "#13283a"); lg.addColorStop(1, "#0c1a28");
+        c.fillStyle = lg; c.fill();
+        c.lineJoin = "round";
+        c.shadowBlur = 6; c.shadowColor = "rgba(45,212,191,.5)";
+        c.strokeStyle = "rgba(94,234,212,.55)"; c.lineWidth = 0.9; c.stroke();
+        c.shadowBlur = 0;
+      }
+    };
+
     const draw = (now) => {
       const t = now / 1000;
       const v = view.current;
@@ -214,57 +305,20 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
         }
       }
       const W = sz.w, H = sz.h;
+      const sig = v.s.toFixed(3) + "|" + v.tx.toFixed(1) + "|" + v.ty.toFixed(1);
+      if (sig !== lastSig) { paintStatic(sgx, v, W, H); lastSig = sig; }
+      g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.drawImage(sgc, 0, 0);
       g.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // deep-space background
-      const bg = g.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.9);
-      bg.addColorStop(0, "#0a1320"); bg.addColorStop(0.6, "#070d17"); bg.addColorStop(1, "#04070e");
-      g.fillStyle = bg; g.fillRect(0, 0, W, H);
-
       const P = (lng, lat) => project(lng, lat, v);
 
-      // graticule (dotted), equator emphasised
-      g.lineWidth = 0.5; g.setLineDash([1, 5]); g.lineCap = "round";
-      for (let lng = -180; lng <= 180; lng += 30) {
-        const a = P(lng, 88), b = P(lng, -88);
-        g.strokeStyle = "rgba(56,189,248,.07)";
-        g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
-      }
-      for (let lat = -60; lat <= 60; lat += 30) {
-        const a = P(-180, lat), b = P(180, lat);
-        g.strokeStyle = lat === 0 ? "rgba(56,189,248,.16)" : "rgba(56,189,248,.07)";
-        g.beginPath(); g.moveTo(a.x, a.y); g.lineTo(b.x, b.y); g.stroke();
-      }
-      g.setLineDash([]);
-
-      // landmasses — filled, with a glowing coastline
-      for (const poly of LAND) {
-        let minX = 1e9, maxX = -1e9, minY = 1e9, maxY = -1e9;
-        g.beginPath();
-        for (let i = 0; i < poly.length; i++) {
-          const p = P(poly[i][0], poly[i][1]);
-          if (i === 0) g.moveTo(p.x, p.y); else g.lineTo(p.x, p.y);
-          if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x;
-          if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y;
-        }
-        if (maxX < -5 || minX > W + 5 || maxY < -5 || minY > H + 5) continue; // cull
-        g.closePath();
-        const lg = g.createLinearGradient(0, minY, 0, maxY || minY + 1);
-        lg.addColorStop(0, "#13283a"); lg.addColorStop(1, "#0c1a28");
-        g.fillStyle = lg; g.fill();
-        g.lineJoin = "round";
-        g.shadowBlur = 6; g.shadowColor = "rgba(45,212,191,.5)";
-        g.strokeStyle = "rgba(94,234,212,.55)"; g.lineWidth = 0.9; g.stroke();
-        g.shadowBlur = 0;
-      }
-
       const data = dataRef.current, conns = connRef.current, s = selRef.current, onlyBr = brRef.current;
-      const pm = {}; for (const d of data) pm[d.id] = P(d.lng, d.lat);
+      const rm = recMapRef.current;
+      const pos = (id) => { const d = rm[id]; return d ? P(d.lng, d.lat) : null; };
 
       // faint static web of every link
       for (const c of conns) {
         if (onlyBr && !c.bridge) continue;
-        const a = pm[c.from], b = pm[c.to]; if (!a || !b) continue;
+        const a = pos(c.from), b = pos(c.to); if (!a || !b) continue;
         if (s === c.from || s === c.to) continue;
         const cc = ctrl(a, b);
         g.strokeStyle = c.bridge ? "rgba(251,113,133,.22)" : "rgba(125,211,252,.08)";
@@ -278,15 +332,13 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
         const hot = s === c.from || s === c.to;
         if (!(c.bridge || hot)) continue;
         if (onlyBr && !c.bridge && !hot) continue;
-        const a = pm[c.from], b = pm[c.to]; if (!a || !b) continue;
+        const a = pos(c.from), b = pos(c.to); if (!a || !b) continue;
         const cc = ctrl(a, b);
         const col = hot ? SEL_COL : c.bridge ? BRIDGE_COL : (TC[c.type] || TC.other);
-        // arc body with a soft glow
-        g.shadowBlur = hot ? 10 : 6; g.shadowColor = col;
+        // arc body (glow comes from the travelling comet head — cheaper than shadowBlur)
         g.strokeStyle = hot ? col : col + "77";
         g.lineWidth = hot ? 1.7 : 1.1;
         g.beginPath(); g.moveTo(a.x, a.y); g.quadraticCurveTo(cc.x, cc.y, b.x, b.y); g.stroke();
-        g.shadowBlur = 0;
         // comet tracer travelling along the arc
         const seed = ((c.from.length * 7 + c.to.length * 13) % 100) / 100;
         const speed = hot ? 0.42 : 0.26;
@@ -306,9 +358,11 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
         g.globalAlpha = 0.9; g.drawImage(glowSprite(col), hp.x - hr, hp.y - hr, hr * 2, hr * 2); g.globalAlpha = 1;
       }
 
-      // nodes
-      for (const d of data) {
-        const p = pm[d.id]; if (p.x < -30 || p.x > W + 30 || p.y < -30 || p.y > H + 30) continue;
+      // which nodes get the expensive rich treatment
+      const hiSet = new Set(); if (s) hiSet.add(s);
+      for (const c of conns) { if (c.bridge || s === c.from || s === c.to) { hiSet.add(c.from); hiSet.add(c.to); } }
+
+      const drawRich = (d, p) => {
         const isSel = s === d.id;
         const col = isSel ? SEL_COL : agencyColor(d);
         const pulse = 0.75 + 0.45 * (0.5 + 0.5 * Math.sin(t * 2.0 + (d.lat + d.lng)));
@@ -317,35 +371,59 @@ function MapCanvas({ db, cn, sel, onSel, focus, showBridges }) {
         g.globalAlpha = isSel ? 0.9 : 0.55;
         g.drawImage(glowSprite(col), p.x - gr, p.y - gr, gr * 2, gr * 2);
         g.globalAlpha = 1;
-        // ring
         g.strokeStyle = col; g.lineWidth = 1; g.globalAlpha = 0.7;
         g.beginPath(); g.arc(p.x, p.y, r + 1.5, 0, 7); g.stroke(); g.globalAlpha = 1;
-        // core
         g.fillStyle = col; g.beginPath(); g.arc(p.x, p.y, r, 0, 7); g.fill();
         g.fillStyle = "rgba(255,255,255,.92)"; g.beginPath(); g.arc(p.x, p.y, r * 0.42, 0, 7); g.fill();
         if (isSel) {
           const rr = r + 7 + 4 * (1 + Math.sin(t * 3));
           g.strokeStyle = SEL_COL; g.lineWidth = 1.1; g.globalAlpha = 0.5 + 0.4 * Math.sin(t * 3);
           g.beginPath(); g.arc(p.x, p.y, rr, 0, 7); g.stroke();
-          // crosshair ticks
           g.beginPath();
           g.moveTo(p.x - rr - 4, p.y); g.lineTo(p.x - rr + 2, p.y);
           g.moveTo(p.x + rr - 2, p.y); g.lineTo(p.x + rr + 4, p.y);
           g.moveTo(p.x, p.y - rr - 4); g.lineTo(p.x, p.y - rr + 2);
           g.moveTo(p.x, p.y + rr - 2); g.lineTo(p.x, p.y + rr + 4);
           g.stroke(); g.globalAlpha = 1;
-          // label chip
           const label = shortLoc(d.location).toUpperCase();
           g.font = "600 10px 'DM Mono', monospace";
           const tw = g.measureText(label).width;
           const right = p.x > W - tw - 30;
           const lx = right ? p.x - 16 - tw - 10 : p.x + 16;
           const ly = p.y - 8;
-          g.fillStyle = "rgba(4,8,14,.78)";
-          g.fillRect(lx - 5, ly - 11, tw + 10, 16);
+          g.fillStyle = "rgba(4,8,14,.78)"; g.fillRect(lx - 5, ly - 11, tw + 10, 16);
           g.fillStyle = SEL_COL; g.textAlign = "left"; g.textBaseline = "middle";
           g.fillText(label, lx, ly - 3 + 0.5);
         }
+      };
+
+      // nodes — rich for small sets; at scale, cheap color-batched dots + rich only for highlights
+      if (data.length <= 1200) {
+        for (const d of data) {
+          const p = P(d.lng, d.lat);
+          if (p.x < -30 || p.x > W + 30 || p.y < -30 || p.y > H + 30) continue;
+          drawRich(d, p);
+        }
+      } else {
+        // cheap color-batched dots via precomputed geometry (no per-node allocation)
+        const gm = geomRef.current, n = gm.ids.length;
+        const worldW = W * v.s, worldH = worldW / 2, ox = v.tx, oy = v.ty;
+        const groups = new Map();
+        for (let i = 0; i < n; i++) {
+          if (hiSet.has(gm.ids[i])) continue;
+          const x = ox + gm.nx[i] * worldW; if (x < -4 || x > W + 4) continue;
+          const y = oy + gm.ny[i] * worldH; if (y < -4 || y > H + 4) continue;
+          let arr = groups.get(gm.col[i]); if (!arr) { arr = []; groups.set(gm.col[i], arr); }
+          arr.push(x, y);
+        }
+        g.globalAlpha = 0.9;
+        for (const [col, arr] of groups) {
+          g.fillStyle = col;
+          for (let i = 0; i < arr.length; i += 2) g.fillRect(arr[i] - 0.9, arr[i + 1] - 0.9, 1.9, 1.9);
+        }
+        g.globalAlpha = 1;
+        for (const id of hiSet) { const d = rm[id]; if (!d) continue; drawRich(d, P(d.lng, d.lat)); }
+        if (s && rm[s]) drawRich(rm[s], P(rm[s].lng, rm[s].lat)); // ensure selected on top
       }
 
       // corner targeting brackets
@@ -525,19 +603,37 @@ export default function App() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
+    // instant first paint from the bundled bootstrap…
+    const boot = bootstrap.records || bootstrap;
+    setData(boot); setMeta({ generated_at: bootstrap.generated_at, count: bootstrap.total || boot.length }); setReady(true);
+    // …then swap in the full archive once fetched
     (async () => {
-      if (DATA_URL) {
-        try {
-          const r = await fetch(DATA_URL); const j = await r.json();
-          setData(j.records || j); setMeta({ generated_at: j.generated_at, count: j.count }); setLive(true); setReady(true); return;
-        } catch (e) { /* fall back to bundled snapshot */ }
-      }
-      const recs = snapshot.records || snapshot;
-      setData(recs); setMeta({ generated_at: snapshot.generated_at, count: recs.length }); setReady(true);
+      try {
+        const r = await fetch(DATA_URL); const j = await r.json();
+        const recs = j.records || j;
+        if (recs && recs.length >= boot.length) { setData(recs); setMeta({ generated_at: j.generated_at, count: j.count || recs.length }); setLive(true); }
+      } catch (e) { /* keep bootstrap */ }
     })();
   }, []);
 
-  const conns = useMemo(() => buildConnections(data, 200), [data]);
+  // run the O(n²) engine on the most notable working set so it stays fast at any scale
+  const work = useMemo(() => {
+    if (data.length <= WORK_CAP) return data;
+    return [...data].sort((a, b) => notability(b) - notability(a)).slice(0, WORK_CAP);
+  }, [data]);
+  // bridges (cross-domain) come from the notable set; clusters (local waves) from
+  // the full data. Merge, dedupe by pair, rank bridges up — distinct tabs, one map.
+  const bridgeConns = useMemo(() => buildConnections(work, 200), [work]);
+  const clusters = useMemo(() => buildClusters(data, 220), [data]);
+  const conns = useMemo(() => {
+    const seen = new Set(), all = [];
+    for (const c of [...bridgeConns, ...clusters]) {
+      const k = c.from < c.to ? c.from + "|" + c.to : c.to + "|" + c.from;
+      if (seen.has(k)) continue; seen.add(k); all.push(c);
+    }
+    all.sort((a, b) => (b.bridge - a.bridge) * 0.12 + (b.strength - a.strength));
+    return all.slice(0, 320).map((c, i) => ({ ...c, id: "c" + i }));
+  }, [bridgeConns, clusters]);
   const byId = useMemo(() => { const m = {}; data.forEach((s) => { m[s.id] = s; }); return m; }, [data]);
   const linkCount = useMemo(() => { const m = {}; conns.forEach((c) => { m[c.from] = (m[c.from] || 0) + 1; m[c.to] = (m[c.to] || 0) + 1; }); return m; }, [conns]);
   const bridgeCount = useMemo(() => { const m = {}; conns.forEach((c) => { if (c.bridge) { m[c.from] = (m[c.from] || 0) + 1; m[c.to] = (m[c.to] || 0) + 1; } }); return m; }, [conns]);
@@ -634,7 +730,8 @@ export default function App() {
         )}
 
         <div style={{ paddingBottom: "calc(48px + env(safe-area-inset-bottom))" }}>
-          {tab === "files" && filtered.map((s) => <SRow key={s.id} s={s} sel={sel === s.id} onTap={locate} cc={linkCount[s.id] || 0} bc={bridgeCount[s.id] || 0} />)}
+          {tab === "files" && filtered.slice(0, 400).map((s) => <SRow key={s.id} s={s} sel={sel === s.id} onTap={locate} cc={linkCount[s.id] || 0} bc={bridgeCount[s.id] || 0} />)}
+          {tab === "files" && filtered.length > 400 && <div style={{ padding: "16px", textAlign: "center", color: "#5b7186", fontSize: 9.5, letterSpacing: "0.08em" }}>SHOWING 400 OF {filtered.length.toLocaleString()} · REFINE WITH SEARCH OR FILTERS</div>}
           {tab === "files" && filtered.length === 0 && <div style={{ padding: 48, textAlign: "center", color: "#3a4a60", fontSize: 11, letterSpacing: "0.1em" }}>NO MATCHES</div>}
           {tab === "connections" && conns.map((c) => <CRow key={c.id} c={c} byId={byId} hi={sel === c.from || sel === c.to} onTap={locate} />)}
           {tab === "bridges" && bridges.map((c) => <CRow key={c.id} c={c} byId={byId} hi={sel === c.from || sel === c.to} onTap={locate} />)}

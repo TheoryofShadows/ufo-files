@@ -224,6 +224,10 @@ def source_nuforc():
     geocode is skipped (no junk centroids). Falls back to the baked seed if the
     site is unreachable.
     """
+    # Offline/CI-fast path: skip the live pull and build from the baked seed.
+    if os.environ.get("NUFORC_OFFLINE"):
+        return stamp(load_seed("nuforc"))
+
     geo = {}
     p = SEEDS / "geo_cities.json"
     if p.exists():
@@ -271,7 +275,8 @@ def source_nuforc():
             tm = occ[11:16] if len(occ) >= 16 and ":" in occ[11:16] else None
             shp = norm_shape(shape_s)
             out.append({
-                "id": make_id("nuforc", d, city, state),
+                # id scheme matches the baked seed so live + seed union cleanly
+                "id": "nuforc-" + make_id(d, city, state, "US"),
                 "designator": None, "date": d, "date_precision": "day", "time": tm,
                 "location": f"{city}, {state}".strip(", "),
                 "lat": g[0], "lng": g[1], "geo_precision": "city",
@@ -301,12 +306,15 @@ def source_nuforc():
             if mo == 0:
                 y -= 1; mo = 12
 
+    # Union with the baked seed. NUFORC rate-limits bulk pulls (you get the most
+    # recent months, then the CDN throttles), so a single run can't fetch the
+    # whole archive. Merging with the committed seed means the large geocoded
+    # corpus persists and live runs only ever *add* freshly reported months.
+    for r in load_seed("nuforc"):
+        records.setdefault(r["id"], r)
     recs = list(records.values())
     if not recs:
-        return stamp(load_seed("nuforc"))
-    # prefer substantive reports, then cap so the connection graph stays fast
-    recs.sort(key=lambda r: (r["shape"] not in ("unknown", "other"), len(r["description"])), reverse=True)
-    recs = recs[:340]
+        return []
     recs.sort(key=lambda r: r["date"])
     return stamp(recs)
 

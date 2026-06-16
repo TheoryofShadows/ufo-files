@@ -42,6 +42,8 @@ const hav = (a, b) => {
 };
 const dDays = (a, b) => Math.abs(new Date(a) - new Date(b)) / 864e5;
 const ANG = new Set(["triangle", "chevron", "boomerang", "diamond"]);
+// generic tags that carry no real "signature" — excluded from bridge matching
+const STOP_TAGS = new Set(["historical", "PURSUE", "NUFORC", "civilian", "disc", "triangle", "orb", "cigar", "chevron", "boomerang", "diamond", "other", "unknown"]);
 const fmtKm = (km) => (km >= 1000 ? (km / 1000).toFixed(1) + "Mm" : Math.round(km) + "km");
 const fmtSpan = (d) => (d >= 365 ? (d / 365).toFixed(d >= 3650 ? 0 : 1) + "yr" : Math.round(d) + "d");
 
@@ -53,14 +55,18 @@ function scorePair(a, b) {
   else if (km < 400) f.push({ t: "proximity", s: Math.max(0.25, 0.65 - (km - 80) * 0.001), concept: false, r: Math.round(km) + "km, same region" });
   if (days < 7) f.push({ t: "temporal", s: 0.92, concept: false, r: Math.round(days) + "d apart, same wave" });
   else if (days < 60) f.push({ t: "temporal", s: 0.55, concept: false, r: Math.round(days) + " days apart" });
-  if (a.shape === b.shape && a.shape !== "other" && a.shape !== "unknown") f.push({ t: "shape", s: 0.6, concept: true, r: "Both " + a.shape });
+  if (a.shape === b.shape && a.shape !== "other" && a.shape !== "unknown") {
+    // distinctive craft shapes are meaningful links; ubiquitous "orb" is weak
+    const distinctive = a.shape !== "orb";
+    f.push({ t: "shape", s: distinctive ? 0.6 : 0.36, concept: distinctive, r: "Both " + a.shape });
+  }
   if (ANG.has(a.shape) && ANG.has(b.shape) && a.shape !== b.shape) f.push({ t: "shape", s: 0.45, concept: true, r: "Angular family (" + a.shape + "/" + b.shape + ")" });
-  if (a.theater && b.theater && a.theater === b.theater) f.push({ t: "pattern", s: 0.5, concept: true, r: "Same theater: " + a.theater });
+  if (a.theater && b.theater && a.theater === b.theater && a.theater !== "US-Domestic") f.push({ t: "pattern", s: 0.5, concept: true, r: "Same theater: " + a.theater });
   const sa = a.source && a.source.agency, sb = b.source && b.source.agency;
-  if (sa && sb && sa === sb && sa !== "Other") f.push({ t: "pattern", s: 0.3, concept: false, r: "Same agency: " + sa });
+  if (sa && sb && sa === sb && sa !== "Other" && sa !== "NUFORC") f.push({ t: "pattern", s: 0.3, concept: false, r: "Same agency: " + sa });
   if (a.tags && b.tags) {
-    const sh = a.tags.filter((t) => b.tags.includes(t) && t !== "historical" && t !== "PURSUE");
-    if (sh.length) f.push({ t: "pattern", s: 0.3 + sh.length * 0.1, concept: true, r: "Shared signature: " + sh.slice(0, 3).join(", ") });
+    const sh = a.tags.filter((t) => b.tags.includes(t) && !STOP_TAGS.has(t));
+    if (sh.length) f.push({ t: "pattern", s: 0.3 + sh.length * 0.12, concept: true, r: "Shared signature: " + sh.slice(0, 3).join(", ") });
   }
   if (!f.length) return null;
 
@@ -531,7 +537,7 @@ export default function App() {
     })();
   }, []);
 
-  const conns = useMemo(() => buildConnections(data, 130), [data]);
+  const conns = useMemo(() => buildConnections(data, 200), [data]);
   const byId = useMemo(() => { const m = {}; data.forEach((s) => { m[s.id] = s; }); return m; }, [data]);
   const linkCount = useMemo(() => { const m = {}; conns.forEach((c) => { m[c.from] = (m[c.from] || 0) + 1; m[c.to] = (m[c.to] || 0) + 1; }); return m; }, [conns]);
   const bridgeCount = useMemo(() => { const m = {}; conns.forEach((c) => { if (c.bridge) { m[c.from] = (m[c.from] || 0) + 1; m[c.to] = (m[c.to] || 0) + 1; } }); return m; }, [conns]);

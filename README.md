@@ -51,8 +51,14 @@ gracefully:
 | Strategy | Used for | How it works |
 |----------|----------|--------------|
 | **API**    | NARA | Real JSON API (set `NARA_API_KEY`) |
-| **SCRAPE** | NUFORC | Parse public HTML index, fall back to seed |
+| **SCRAPE** | NUFORC | Parse the highlights + recent monthly HTML tables, geocode each City/State against `seeds/geo_cities.json`, fall back to seed |
 | **SEED**   | PURSUE, FBI, CIA, NSA, NASA | Curated records in `scrapers/seeds/*.json` |
+
+NUFORC is the one genuinely large, growing source (100k+ civilian reports). The
+scraper pulls the curated "highlights" table plus the most recent monthly tables,
+geocodes every City/State to real coordinates, drops anything it can't place (no
+junk centroids), and caps to the most substantive ~340 so the connection graph
+stays fast. That alone takes the dataset from a handful of files to **400+**.
 
 A blocked source falls back to its seed file instead of silently producing
 nothing. The PURSUE catalog is small and human-readable, so when a new tranche
@@ -76,7 +82,9 @@ uap-files/
 │   └── seeds/               # curated data for gated sources
 │       ├── pursue.json      # war.gov files w/ official designators (MR-xx, PR-xx)
 │       ├── historical.json  # the vetted canon (1942–2024)
-│       └── fbi.json  cia.json  nsa.json  nasa.json  nara.json  nuforc.json
+│       ├── nuforc.json      # baked geocoded NUFORC reports (offline fallback)
+│       ├── geo_cities.json  # compact US city→lat/lng lookup for NUFORC geocoding
+│       └── fbi.json  cia.json  nsa.json  nasa.json  nara.json
 ├── data/
 │   ├── files.json           # ← THE OUTPUT. merged, deduped, schema-valid.
 │   └── _report.json         # per-source counts + errors (debugging)

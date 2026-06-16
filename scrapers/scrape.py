@@ -217,41 +217,99 @@ def source_nasa():
 def source_nuforc():
     """
     NUFORC civilian sighting database.
-    STRATEGY: SCRAPE (NUFORC publishes HTML index tables by month).
-    Falls back to seed. This is the only source that is genuinely large
-    and growing (100k+ reports) — we cap to recent + high-witness here.
+    STRATEGY: SCRAPE (NUFORC publishes HTML index tables: a curated "highlights"
+    table plus one table per month). This is the only genuinely large, growing
+    source (100k+ reports), so we pull highlights + the most recent months and
+    geocode each City/State against seeds/geo_cities.json. Anything we can't
+    geocode is skipped (no junk centroids). Falls back to the baked seed if the
+    site is unreachable.
     """
-    records = []
-    # NUFORC's public index is HTML; attempt the recent-events table.
-    ok, html = fetch("https://nuforc.org/subndx/?id=highlights")
-    if ok:
+    geo = {}
+    p = SEEDS / "geo_cities.json"
+    if p.exists():
+        geo = json.loads(p.read_text())
+
+    def geocode(city, state):
+        name = city.split("(")[0].strip().lower()
+        for key in (f"US|{name}",):
+            if key in geo:
+                lat, lng = geo[key]
+                # deterministic sub-city jitter so same-city reports don't stack
+                h = int(hashlib.sha1((city + state).encode()).hexdigest(), 16)
+                return round(lat + ((h % 1000) / 1000 - 0.5) * 0.18, 4), \
+                       round(lng + (((h >> 10) % 1000) / 1000 - 0.5) * 0.18, 4)
+        return None
+
+    SHAPES = {"disk": "disc", "disc": "disc", "saucer": "disc", "circle": "orb",
+              "sphere": "orb", "orb": "orb", "light": "orb", "flash": "orb",
+              "fireball": "orb", "star": "orb", "oval": "orb", "egg": "orb",
+              "triangle": "triangle", "delta": "triangle", "chevron": "chevron",
+              "boomerang": "boomerang", "diamond": "diamond", "cigar": "cigar",
+              "cylinder": "cigar"}
+
+    def norm_shape(s):
+        s = (s or "").strip().lower()
+        return SHAPES.get(s, "unknown" if not s else "other")
+
+    def parse_table(html, collection):
+        out = []
         soup = BeautifulSoup(html, "lxml")
-        for row in soup.select("table tr")[1:60]:  # cap
+        for row in soup.select("table tr")[1:]:
             cells = [c.get_text(strip=True) for c in row.find_all("td")]
-            if len(cells) < 5:
+            if len(cells) < 8:
                 continue
-            # NUFORC columns vary; this is best-effort and validated downstream.
-            date_s, city, state, shape_s = cells[0], cells[1], cells[2], cells[3]
+            _, occ, city, state, country, shape_s, summary, _rep = cells[:8]
             try:
-                d = datetime.datetime.strptime(date_s[:10], "%m/%d/%Y").strftime("%Y-%m-%d")
+                d = datetime.datetime.strptime(occ[:10], "%m/%d/%Y").strftime("%Y-%m-%d")
             except Exception:
                 continue
-            records.append({
-                "id": make_id("nuforc", date_s, city, state),
-                "designator": None, "date": d, "date_precision": "day", "time": None,
-                "location": f"{city}, {state}", "lat": 39.0, "lng": -98.0,
-                "geo_precision": "approximate",
-                "shape": (shape_s.lower() if shape_s.lower() in
-                          {"disc","triangle","orb","cigar","chevron","diamond","other"} else "unknown"),
-                "duration": None, "description": f"NUFORC report: {shape_s} over {city}, {state}.",
+            if (country or "USA") not in ("USA", "United States", ""):
+                continue  # geocoder is US-only; international cases live in the seed
+            g = geocode(city, state)
+            if not g:
+                continue
+            tm = occ[11:16] if len(occ) >= 16 and ":" in occ[11:16] else None
+            shp = norm_shape(shape_s)
+            out.append({
+                "id": make_id("nuforc", d, city, state),
+                "designator": None, "date": d, "date_precision": "day", "time": tm,
+                "location": f"{city}, {state}".strip(", "),
+                "lat": g[0], "lng": g[1], "geo_precision": "city",
+                "shape": shp, "duration": None,
+                "description": (summary[:560] or f"NUFORC report from {city}, {state}."),
                 "witnesses": 1,
-                "source": {"agency": "NUFORC", "collection": "NUFORC", "url": "https://nuforc.org"},
+                "source": {"agency": "NUFORC", "collection": collection, "url": "https://nuforc.org"},
                 "theater": "US-Domestic", "evidence": ["testimony"],
-                "status": "unresolved", "tags": ["NUFORC", "civilian"],
+                "status": "unresolved",
+                "tags": ["NUFORC", "civilian"] + ([shp] if shp not in ("unknown", "other") else []),
             })
-    if not records:
-        records = load_seed("nuforc")
-    return stamp(records)
+        return out
+
+    records = {}
+    ok, html = fetch("https://nuforc.org/subndx/?id=highlights")
+    if ok:
+        for r in parse_table(html, "NUFORC-Highlights"):
+            records.setdefault(r["id"], r)
+        # most recent months for volume
+        y, mo = datetime.datetime.utcnow().year, datetime.datetime.utcnow().month
+        for _ in range(14):
+            ok2, h2 = fetch(f"https://nuforc.org/subndx/?id=e{y}{mo:02d}")
+            if ok2:
+                for r in parse_table(h2, "NUFORC"):
+                    records.setdefault(r["id"], r)
+            mo -= 1
+            if mo == 0:
+                y -= 1; mo = 12
+
+    recs = list(records.values())
+    if not recs:
+        return stamp(load_seed("nuforc"))
+    # prefer substantive reports, then cap so the connection graph stays fast
+    recs.sort(key=lambda r: (r["shape"] not in ("unknown", "other"), len(r["description"])), reverse=True)
+    recs = recs[:340]
+    recs.sort(key=lambda r: r["date"])
+    return stamp(recs)
+
 
 
 def source_historical():

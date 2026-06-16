@@ -1,0 +1,3 @@
+[
+  {"id":"nsa-umbra-2026","designator":"Umbra FOIA Release","date":"2026-05-18","date_precision":"day","time":null,"location":"NSA (Fort Meade, MD)","lat":39.11,"lng":-76.77,"geo_precision":"city","shape":"other","duration":null,"description":"NSA released 300+ pages of formerly Top Secret/Umbra UAP records via a Disclosure Foundation FOIA appeal. First time material at that classification level was publicly released for UAP.","witnesses":1,"source":{"agency":"NSA","collection":"NSA-Umbra","url":"https://www.nsa.gov/Helpful-Links/NSA-FOIA/"},"theater":"US-Domestic","evidence":["document"],"status":"historical","tags":["NSA","umbra","FOIA","disclosure"]}
+]

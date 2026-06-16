@@ -1,0 +1,3 @@
+[
+  {"id":"cia-robertson","designator":"Robertson Panel","date":"1953-01-14","date_precision":"day","time":null,"location":"Washington, D.C. (CIA)","lat":38.9,"lng":-77.04,"geo_precision":"city","shape":"other","duration":null,"description":"CIA-convened scientific panel that reviewed UFO data and recommended debunking sightings to reduce public interest. A foundational document in UFO secrecy history.","witnesses":1,"source":{"agency":"CIA","collection":"CIA-ReadingRoom","url":"https://www.cia.gov/readingroom/collection/ufos-fact-or-fiction"},"theater":"US-Domestic","evidence":["document"],"status":"historical","tags":["CIA","panel","historical"]}
+]

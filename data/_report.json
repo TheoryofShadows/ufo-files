@@ -1,0 +1,58 @@
+{
+  "historical": {
+    "strategy": "SEED",
+    "fetched": 60,
+    "valid": 60,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "pursue": {
+    "strategy": "SEED",
+    "fetched": 25,
+    "valid": 25,
+    "invalid": 0,
+    "secs": 0.17
+  },
+  "nara": {
+    "strategy": "API",
+    "fetched": 1,
+    "valid": 1,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "fbi": {
+    "strategy": "SEED",
+    "fetched": 2,
+    "valid": 2,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "cia": {
+    "strategy": "SEED",
+    "fetched": 1,
+    "valid": 1,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "nsa": {
+    "strategy": "SEED",
+    "fetched": 1,
+    "valid": 1,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "nasa": {
+    "strategy": "SEED",
+    "fetched": 1,
+    "valid": 1,
+    "invalid": 0,
+    "secs": 0.0
+  },
+  "nuforc": {
+    "strategy": "SCRAPE",
+    "fetched": 4249,
+    "valid": 4249,
+    "invalid": 0,
+    "secs": 18.12
+  }
+}

@@ -1,0 +1,1848 @@
+[
+  {
+    "id": "hist-r01",
+    "designator": null,
+    "date": "1942-02-25",
+    "date_precision": "day",
+    "time": "03:16",
+    "location": "Los Angeles, CA",
+    "lat": 34.05,
+    "lng": -118.24,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "1 hr",
+    "description": "Battle of LA: 1,400+ AA rounds fired at objects. Searchlights converged. Five civilians died.",
+    "witnesses": 1000,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "mass",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r02",
+    "designator": null,
+    "date": "1947-06-21",
+    "date_precision": "day",
+    "time": "14:00",
+    "location": "Maury Island, WA",
+    "lat": 47.38,
+    "lng": -122.43,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "20 min",
+    "description": "6 doughnut-shaped objects over Puget Sound. One dropped molten slag onto boat. Army CIC investigated.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "physical",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r03",
+    "designator": null,
+    "date": "1947-06-24",
+    "date_precision": "day",
+    "time": "15:00",
+    "location": "Mt. Rainier, WA",
+    "lat": 46.85,
+    "lng": -121.76,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "3 min",
+    "description": "Pilot Kenneth Arnold: 9 crescent objects at 1,200mph. Coined 'flying saucer.' First modern UFO sighting.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "pilot",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r04",
+    "designator": null,
+    "date": "1947-07-08",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "Roswell, NM",
+    "lat": 33.39,
+    "lng": -104.52,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "N/A",
+    "description": "Army announced 'flying disc' recovery, retracted to 'weather balloon.' Later attributed to Project Mogul.",
+    "witnesses": 5,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "crash",
+      "physical",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r05",
+    "designator": null,
+    "date": "1948-01-07",
+    "date_precision": "day",
+    "time": "13:15",
+    "location": "Fort Knox, KY",
+    "lat": 37.89,
+    "lng": -85.96,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "25 min",
+    "description": "Capt. Mantell crashed P-51 pursuing massive bright object. First pilot fatality linked to UFO.",
+    "witnesses": 12,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "pilot",
+      "fatality",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r06",
+    "designator": null,
+    "date": "1951-08-25",
+    "date_precision": "day",
+    "time": "21:20",
+    "location": "Lubbock, TX",
+    "lat": 33.56,
+    "lng": -101.85,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "5 min",
+    "description": "Three Texas Tech professors saw V-formation of 20-30 bluish-green lights. Student photographed them. Blue Book: unexplained.",
+    "witnesses": 30,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "academic",
+      "formation",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r07",
+    "designator": null,
+    "date": "1952-07-19",
+    "date_precision": "day",
+    "time": "23:40",
+    "location": "Washington, D.C.",
+    "lat": 38.85,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "6 hrs",
+    "description": "Objects on radar at National Airport + Andrews AFB. F-94s scrambled. Repeated Jul 26. Largest Pentagon press conf since WWII.",
+    "witnesses": 100,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "radar",
+      "jet-scramble",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r08",
+    "designator": null,
+    "date": "1954-10-27",
+    "date_precision": "day",
+    "time": "14:30",
+    "location": "Florence, Italy",
+    "lat": 43.77,
+    "lng": 11.25,
+    "geo_precision": "city",
+    "shape": "cigar",
+    "duration": "10 min",
+    "description": "10,000+ spectators at football match watched cigar objects hover. Released silvery 'angel hair.' Match halted.",
+    "witnesses": 10000,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "mass",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r09",
+    "designator": null,
+    "date": "1956-08-13",
+    "date_precision": "day",
+    "time": "22:55",
+    "location": "Lakenheath, UK",
+    "lat": 52.41,
+    "lng": 0.56,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "5 hrs",
+    "description": "RAF/USAF radar tracked fast objects. Venom fighter got lock but object maneuvered behind and tailed it. Condon: 'most puzzling.'",
+    "witnesses": 30,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "radar",
+      "jet-scramble",
+      "EM",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r10",
+    "designator": null,
+    "date": "1957-11-02",
+    "date_precision": "day",
+    "time": "23:00",
+    "location": "Levelland, TX",
+    "lat": 33.57,
+    "lng": -102.37,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "3 hrs",
+    "description": "15 callers: egg-shaped object on roads. 9+ vehicles had engines and lights killed, restored after departure. Most important EM case in US.",
+    "witnesses": 15,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "EM",
+      "vehicle",
+      "police",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r11",
+    "designator": null,
+    "date": "1961-09-19",
+    "date_precision": "day",
+    "time": "22:30",
+    "location": "Lancaster, NH",
+    "lat": 44.49,
+    "lng": -71.57,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "2 hrs",
+    "description": "Betty and Barney Hill: disc with windows on Route 3. 'Missing time.' Car compass erratic near marks on vehicle afterward.",
+    "witnesses": 2,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "abduction",
+      "EM",
+      "physical",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r12",
+    "designator": null,
+    "date": "1964-04-24",
+    "date_precision": "day",
+    "time": "17:45",
+    "location": "Socorro, NM",
+    "lat": 34.06,
+    "lng": -106.89,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "10 min",
+    "description": "Officer Zamora saw egg-shaped craft + 2 small occupants. Burn marks, compressed soil, metal traces. Blue Book: 'unknown.'",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "police",
+      "physical",
+      "occupants",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r13",
+    "designator": null,
+    "date": "1965-09-03",
+    "date_precision": "day",
+    "time": "02:00",
+    "location": "Exeter, NH",
+    "lat": 42.98,
+    "lng": -70.95,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "45 min",
+    "description": "Hitchhiker + two police officers saw pulsating red lights over fields. 60+ reports followed. Blue Book: 'unidentified.'",
+    "witnesses": 60,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "police",
+      "mass",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r14",
+    "designator": null,
+    "date": "1965-12-09",
+    "date_precision": "day",
+    "time": "16:45",
+    "location": "Kecksburg, PA",
+    "lat": 40.18,
+    "lng": -79.46,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "30 min",
+    "description": "Fireball across 6 states. Acorn-shaped object recovered by military. Witnesses described hieroglyphic-like markings.",
+    "witnesses": 100,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "crash",
+      "military",
+      "physical",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r15",
+    "designator": null,
+    "date": "1966-04-06",
+    "date_precision": "day",
+    "time": "11:00",
+    "location": "Westall, Melbourne",
+    "lat": -37.93,
+    "lng": 145.1,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "20 min",
+    "description": "200+ students and staff saw grey saucer descend, land, ascend at extreme speed. Landing site grass flattened in circle.",
+    "witnesses": 200,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "school",
+      "mass",
+      "landing",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r16",
+    "designator": null,
+    "date": "1967-10-04",
+    "date_precision": "day",
+    "time": "20:00",
+    "location": "Shag Harbour, NS",
+    "lat": 43.46,
+    "lng": -65.74,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "30 min",
+    "description": "RCMP officers saw lit object crash into harbour. Navy divers found nothing. Official Canadian govt 'UFO incident.'",
+    "witnesses": 30,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "police",
+      "crash",
+      "underwater",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r17",
+    "designator": null,
+    "date": "1967-05-20",
+    "date_precision": "day",
+    "time": "12:15",
+    "location": "Falcon Lake, Manitoba",
+    "lat": 49.7,
+    "lng": -95.25,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "30 min",
+    "description": "Geologist Michalak touched a landed disc. Hot exhaust burned grid into his chest. Hospitalized. Canada $20 coin 2018.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "physical",
+      "radiation",
+      "landing",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r18",
+    "designator": null,
+    "date": "1973-10-18",
+    "date_precision": "day",
+    "time": "23:00",
+    "location": "Mansfield, OH",
+    "lat": 40.76,
+    "lng": -82.52,
+    "geo_precision": "city",
+    "shape": "cigar",
+    "duration": "5 min",
+    "description": "Army helicopter pulled upward 1,800ft by cigar-shaped object without pilot input. 4 crew + ground witnesses.",
+    "witnesses": 9,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "pilot",
+      "EM",
+      "vehicle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r19",
+    "designator": null,
+    "date": "1975-11-07",
+    "date_precision": "day",
+    "time": "22:00",
+    "location": "Travis AFB, CA",
+    "lat": 38.26,
+    "lng": -121.93,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "2 hrs",
+    "description": "Security police saw luminous objects over weapons storage. Part of wave over US nuclear sites (Malmstrom, Loring, Wurtsmith).",
+    "witnesses": 15,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "nuclear",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r20",
+    "designator": null,
+    "date": "1976-09-19",
+    "date_precision": "day",
+    "time": "01:30",
+    "location": "Tehran, Iran",
+    "lat": 35.69,
+    "lng": 51.39,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "90 min",
+    "description": "F-4 Phantoms scrambled. Weapons systems jammed on approach. Confirmed by SECRET US DIA documents.",
+    "witnesses": 20,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "jet-scramble",
+      "EM",
+      "weapons-jam",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r21",
+    "designator": null,
+    "date": "1978-10-21",
+    "date_precision": "day",
+    "time": "18:00",
+    "location": "Bass Strait, Australia",
+    "lat": -39.47,
+    "lng": 145.5,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "6 min",
+    "description": "Pilot Valentich radioed ATC describing unknown aircraft above him. Transmission cut off mid-sentence. Neither found.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "pilot",
+      "fatality",
+      "disappearance",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r22",
+    "designator": null,
+    "date": "1980-12-26",
+    "date_precision": "day",
+    "time": "03:00",
+    "location": "Rendlesham Forest, UK",
+    "lat": 52.08,
+    "lng": 1.43,
+    "geo_precision": "city",
+    "shape": "triangle",
+    "duration": "3 days",
+    "description": "USAF at RAF Woodbridge: glowing triangle over 3 nights. Lt. Col. Halt recorded elevated radiation + EM effects. 'Britain's Roswell.'",
+    "witnesses": 20,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "triangle",
+      "physical",
+      "radiation",
+      "EM",
+      "landing",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r23",
+    "designator": null,
+    "date": "1980-12-29",
+    "date_precision": "day",
+    "time": "21:00",
+    "location": "Huffman, TX",
+    "lat": 29.95,
+    "lng": -95.08,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "15 min",
+    "description": "Cash-Landrum: diamond object belching flame, 23 military helicopters. All three witnesses suffered radiation burns. Cash died of cancer.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "radiation",
+      "military",
+      "physical",
+      "EM",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r24",
+    "designator": null,
+    "date": "1986-05-19",
+    "date_precision": "day",
+    "time": "21:00",
+    "location": "Sao Paulo, Brazil",
+    "lat": -23.55,
+    "lng": -46.63,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "3 hrs",
+    "description": "Brazilian AF scrambled F-5E and Mirage jets to intercept 20+ UFOs on radar across several states. Confirmed by AF Minister.",
+    "witnesses": 50,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "jet-scramble",
+      "radar",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r25",
+    "designator": null,
+    "date": "1987-11-11",
+    "date_precision": "day",
+    "time": "17:00",
+    "location": "Gulf Breeze, FL",
+    "lat": 30.36,
+    "lng": -87.16,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "Months",
+    "description": "Hundreds reported luminous craft with blue beam. Ed Walters photographed. Six AWOL Army intel analysts found in area.",
+    "witnesses": 200,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "mass",
+      "military",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r26",
+    "designator": null,
+    "date": "1989-11-29",
+    "date_precision": "day",
+    "time": "18:45",
+    "location": "Eupen, Belgium",
+    "lat": 50.63,
+    "lng": 6.04,
+    "geo_precision": "city",
+    "shape": "triangle",
+    "duration": "5 months",
+    "description": "~13,500 witnesses. Silent triangular craft. F-16s got radar lock; objects pulled 40g+ evasive maneuvers. Military press conference.",
+    "witnesses": 13500,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "triangle",
+      "military",
+      "jet-scramble",
+      "radar",
+      "mass",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r27",
+    "designator": null,
+    "date": "1990-03-30",
+    "date_precision": "day",
+    "time": "23:00",
+    "location": "Brussels, Belgium",
+    "lat": 50.85,
+    "lng": 4.35,
+    "geo_precision": "city",
+    "shape": "triangle",
+    "duration": "1 hr",
+    "description": "Belgian wave: Two F-16s scrambled. Radar: 280 to 1,800km/h acceleration and 1,500m dive in 1-2 seconds.",
+    "witnesses": 2000,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "triangle",
+      "military",
+      "jet-scramble",
+      "radar",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r28",
+    "designator": null,
+    "date": "1994-09-16",
+    "date_precision": "day",
+    "time": "10:15",
+    "location": "Ruwa, Zimbabwe",
+    "lat": -17.87,
+    "lng": 31.24,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "15 min",
+    "description": "62 children at Ariel School saw silver disc land. Described beings communicating telepathically. Harvard's Dr. John Mack investigated.",
+    "witnesses": 62,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "school",
+      "landing",
+      "occupants",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r29",
+    "designator": null,
+    "date": "1997-03-13",
+    "date_precision": "day",
+    "time": "19:55",
+    "location": "Henderson NV to Prescott AZ",
+    "lat": 34.61,
+    "lng": -112.32,
+    "geo_precision": "city",
+    "shape": "chevron",
+    "duration": "45 min",
+    "description": "V-formation from Henderson NV moving SE. Former police officer in Paulden confirmed. Prescott Valley: mile-wide silent craft.",
+    "witnesses": 500,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "mass",
+      "formation",
+      "triangle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r30",
+    "designator": null,
+    "date": "1997-03-13",
+    "date_precision": "day",
+    "time": "20:30",
+    "location": "Phoenix, AZ",
+    "lat": 33.45,
+    "lng": -112.07,
+    "geo_precision": "city",
+    "shape": "chevron",
+    "duration": "2 hrs",
+    "description": "Thousands saw V-formation spanning a mile. Second event ~10pm: orbs over Sierra Estrella. Governor confirmed personal sighting.",
+    "witnesses": 10000,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "mass",
+      "formation",
+      "triangle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r31",
+    "designator": null,
+    "date": "1997-03-13",
+    "date_precision": "day",
+    "time": "21:15",
+    "location": "Tucson, AZ",
+    "lat": 32.22,
+    "lng": -110.93,
+    "geo_precision": "city",
+    "shape": "chevron",
+    "duration": "20 min",
+    "description": "Southernmost Phoenix Lights reports. Object tracked ~300 miles from Nevada to Tucson in ~90 min.",
+    "witnesses": 200,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "mass",
+      "formation",
+      "triangle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r32",
+    "designator": null,
+    "date": "2000-01-05",
+    "date_precision": "day",
+    "time": "04:00",
+    "location": "St. Clair County, IL",
+    "lat": 38.52,
+    "lng": -89.98,
+    "geo_precision": "city",
+    "shape": "triangle",
+    "duration": "30 min",
+    "description": "Triangle tracked by police across multiple towns. Officers radioed each other in real-time. Sketch composites matched.",
+    "witnesses": 8,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "police",
+      "triangle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r33",
+    "designator": null,
+    "date": "2004-11-14",
+    "date_precision": "day",
+    "time": "14:00",
+    "location": "USS Nimitz, Pacific",
+    "lat": 31.33,
+    "lng": -117.17,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "5 min",
+    "description": "Cmdr. Fravor: white 'Tic Tac' 40ft hovering above churning water. Accelerated beyond visual range in <1 sec. FLIR declassified 2020.",
+    "witnesses": 6,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "pilot",
+      "radar",
+      "video",
+      "EM",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r34",
+    "designator": null,
+    "date": "2006-11-07",
+    "date_precision": "day",
+    "time": "16:15",
+    "location": "O'Hare Airport, Chicago",
+    "lat": 41.98,
+    "lng": -87.9,
+    "geo_precision": "city",
+    "shape": "disc",
+    "duration": "5 min",
+    "description": "United Airlines staff at Gate C17: dark metallic disc below clouds. Shot upward punching hole in overcast. FAA refused to investigate.",
+    "witnesses": 12,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "aviation",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r35",
+    "designator": null,
+    "date": "2008-01-08",
+    "date_precision": "day",
+    "time": "18:15",
+    "location": "Stephenville, TX",
+    "lat": 32.22,
+    "lng": -98.22,
+    "geo_precision": "city",
+    "shape": "chevron",
+    "duration": "4 min",
+    "description": "Dozens saw football-field-sized craft. F-16s in area. FAA radar confirmed anomalous returns.",
+    "witnesses": 50,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "pilot",
+      "military",
+      "radar",
+      "triangle",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r36",
+    "designator": null,
+    "date": "2013-04-25",
+    "date_precision": "day",
+    "time": "21:30",
+    "location": "Aguadilla, PR",
+    "lat": 18.5,
+    "lng": -67.14,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "3 min",
+    "description": "US Customs IR camera: object at 100+ mph split into two and entered ocean without slowing. DHS video leaked.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "video",
+      "underwater",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r37",
+    "designator": null,
+    "date": "2015-01-15",
+    "date_precision": "day",
+    "time": "12:00",
+    "location": "USS Roosevelt, Atlantic",
+    "lat": 30.5,
+    "lng": -79.8,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "Months",
+    "description": "Navy pilots: daily encounters 2014-15. GIMBAL and GOFAST IR videos. Objects with no propulsion against 120kt winds.",
+    "witnesses": 50,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "pilot",
+      "radar",
+      "video",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r38",
+    "designator": null,
+    "date": "2019-07-15",
+    "date_precision": "day",
+    "time": "21:00",
+    "location": "USS Omaha, Pacific",
+    "lat": 32.57,
+    "lng": -117.12,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "Multiple",
+    "description": "Navy CIC filmed spheres swarming ship. One entered ocean without slowing. Pentagon confirmed video 2021.",
+    "witnesses": 30,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "video",
+      "underwater",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r39",
+    "designator": null,
+    "date": "2020-04-27",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "Pentagon (released)",
+    "lat": 38.87,
+    "lng": -77.06,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "Pentagon officially released 3 Navy UAP videos (FLIR1, GIMBAL, GOFAST). First official US govt acknowledgment.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r40",
+    "designator": null,
+    "date": "2023-02-04",
+    "date_precision": "day",
+    "time": "14:30",
+    "location": "Off South Carolina",
+    "lat": 32.78,
+    "lng": -79.93,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "8 days",
+    "description": "US shot down Chinese balloon + 3 unidentified objects (Alaska, Yukon, Lake Huron). The 3 unknowns never identified.",
+    "witnesses": 200,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "shootdown",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r41",
+    "designator": null,
+    "date": "2023-07-26",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "US Congress",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "Grusch testified about crash retrieval programs. Fravor and Graves also testified. Bipartisan UAPDA legislation introduced.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "congressional",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r42",
+    "designator": null,
+    "date": "2024-09-17",
+    "date_precision": "day",
+    "time": "14:00",
+    "location": "Palmdale, CA",
+    "lat": 34.58,
+    "lng": -118.13,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "Unknown",
+    "description": "ATC at LA Center reported UAP to NUFORC observed by military King Air crew on active frequency. Under investigation.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "aviation",
+      "military",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r43",
+    "designator": null,
+    "date": "1986-11-17",
+    "date_precision": "day",
+    "time": "17:45",
+    "location": "Alaska (JAL 1628)",
+    "lat": 62.0,
+    "lng": -150.0,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "50 min",
+    "description": "JAL 747 crew saw two small objects and one 'walnut-shaped' craft the size of a carrier. FAA radar confirmed. Division Chief preserved data.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "aviation",
+      "pilot",
+      "radar",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r44",
+    "designator": null,
+    "date": "1991-11-29",
+    "date_precision": "day",
+    "time": "19:00",
+    "location": "Greifswald, Germany",
+    "lat": 54.1,
+    "lng": 13.39,
+    "geo_precision": "city",
+    "shape": "orb",
+    "duration": "30 min",
+    "description": "Luminous orbs near Greifswald nuclear power plant. Videotaped from multiple angles.",
+    "witnesses": 500,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "nuclear",
+      "video",
+      "orb",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r45",
+    "designator": null,
+    "date": "1995-01-20",
+    "date_precision": "day",
+    "time": "18:20",
+    "location": "Varginha, Brazil",
+    "lat": -21.55,
+    "lng": -45.43,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "Days",
+    "description": "Witnesses reported small beings captured by military and fire dept. Two entities taken to hospital. Military denied involvement.",
+    "witnesses": 8,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "occupants",
+      "military",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r46",
+    "designator": null,
+    "date": "2017-12-16",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "Pentagon (NYT reveal)",
+    "lat": 38.87,
+    "lng": -77.06,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "NY Times revealed AATIP, the Pentagon's secret $22M UFO program run 2007-2012 by Luis Elizondo. Published FLIR1 video. Pivotal moment that broke the modern taboo.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "AATIP",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r47",
+    "designator": null,
+    "date": "2020-04-27",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "Pentagon (official release)",
+    "lat": 38.87,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "Pentagon officially released 3 Navy UAP videos (FLIR1, GIMBAL, GOFAST), confirming authenticity. First official US govt acknowledgment of unidentified craft on camera.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "video",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r48",
+    "designator": null,
+    "date": "2021-06-25",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "ODNI (report)",
+    "lat": 38.87,
+    "lng": -77.06,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "ODNI Preliminary Assessment on UAP: 144 reports (2004-2021), only 1 identified (balloon). 18 exhibited 'unusual movement patterns' including stationary hover in high winds.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "ODNI",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r49",
+    "designator": null,
+    "date": "2022-07-15",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "Pentagon (AARO created)",
+    "lat": 38.87,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "DoD establishes All-domain Anomaly Resolution Office (AARO) under Dr. Sean Kirkpatrick. Tasked to investigate UAP across air, sea, space. First permanent UAP office.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "AARO",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r50",
+    "designator": null,
+    "date": "2023-02-04",
+    "date_precision": "day",
+    "time": "14:30",
+    "location": "Off South Carolina",
+    "lat": 32.78,
+    "lng": -79.93,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "8 days",
+    "description": "US shot down Chinese surveillance balloon + 3 unidentified objects over N. America in 8 days (Alaska, Yukon, Lake Huron). The 3 unknowns never recovered or identified.",
+    "witnesses": 200,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "military",
+      "shootdown",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r51",
+    "designator": null,
+    "date": "2023-06-05",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "The Debrief (Grusch)",
+    "lat": 38.9,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "David Grusch, former NGA/UAP Task Force officer, went public alleging multi-decade crash retrieval and reverse-engineering programs. Filed complaint with IC IG, found 'credible and urgent.'",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "whistleblower",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r52",
+    "designator": null,
+    "date": "2023-07-26",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "US Congress (hearing 1)",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "3 hrs",
+    "description": "Grusch, Fravor, Graves testified under oath. Grusch: non-human biologics recovered. Fravor: Tic Tac encounter. Graves: daily encounters off East Coast. Bipartisan UAPDA introduced.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "congressional",
+      "whistleblower",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r53",
+    "designator": null,
+    "date": "2024-03-01",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "AARO HQ (Vol 1 report)",
+    "lat": 38.87,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "AARO Historical Record Report Vol 1: reviewed 1945-present, found 'no empirical evidence' of crash retrievals or reverse-engineering. Contradicted Grusch. Critics disputed methodology.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "AARO",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r54",
+    "designator": null,
+    "date": "2024-06-26",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "GREMLIN (prototype test)",
+    "lat": 38.87,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "AARO deployed GREMLIN, its prototype multi-sensor UAP detection system. Successfully collected data during March 2024 test. Planned for 90-day deployment at site of national security.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "AARO",
+      "sensor",
+      "GREMLIN",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r55",
+    "designator": null,
+    "date": "2024-11-13",
+    "date_precision": "day",
+    "time": "11:30",
+    "location": "US Congress (hearing 2)",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "3 hrs",
+    "description": "Elizondo, Gallaudet, Gold, Shellenberger testified. Elizondo confirmed reverse-engineering program exists. Gallaudet described personal 2015 Navy encounter. Elizondo called coverup a 'cabal.'",
+    "witnesses": 4,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "congressional",
+      "AATIP",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r56",
+    "designator": null,
+    "date": "2024-11-14",
+    "date_precision": "day",
+    "time": "00:00",
+    "location": "AARO (FY24 report)",
+    "lat": 38.87,
+    "lng": -77.04,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "N/A",
+    "description": "AARO FY2024 report: 757 new cases, total 1,652. 21 cases deemed 'truly anomalous' requiring further investigation. 70% resolved as balloons. 444 lacked sufficient data.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "AARO",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r57",
+    "designator": null,
+    "date": "2024-11-13",
+    "date_precision": "day",
+    "time": "20:00",
+    "location": "Picatinny Arsenal, NJ",
+    "lat": 40.96,
+    "lng": -74.53,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "6 weeks",
+    "description": "First NJ mystery drone sighting over Army research facility. Triggered wave of thousands of reports across NJ, NY, CT, PA. FAA restricted airspace. FBI investigated. Never fully explained.",
+    "witnesses": 5000,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "drone-wave",
+      "military",
+      "mass",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r58",
+    "designator": null,
+    "date": "2024-11-19",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "Senate (Gillibrand hearing)",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "2 hrs",
+    "description": "Senate Armed Services subcommittee hearing led by Sen. Gillibrand on UAP, prompted by AARO FY24 report. Pentagon: no evidence of ET but 21 anomalous cases under review.",
+    "witnesses": 1,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "congressional",
+      "AARO",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r59",
+    "designator": null,
+    "date": "2025-01-23",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "US Congress (hearing 3)",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "3 hrs",
+    "description": "House whistleblower hearing. New witness Michael Borland described firsthand experiences and AARO classifying NHI-related info. Called for UAPDA 2025. Described DIA obstruction.",
+    "witnesses": 3,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "congressional",
+      "whistleblower",
+      "historical"
+    ]
+  },
+  {
+    "id": "hist-r60",
+    "designator": null,
+    "date": "2025-06-09",
+    "date_precision": "day",
+    "time": "10:00",
+    "location": "Capitol Hill (press conf)",
+    "lat": 38.89,
+    "lng": -77.01,
+    "geo_precision": "city",
+    "shape": "other",
+    "duration": "1 hr",
+    "description": "Grusch, Reps Luna/Burlison/Moskowitz/Burchett/Perry held press conference. Grusch alleged billions in annual 'slush funds,' DIA obstruction. Lawmakers demanded whistleblower immunity.",
+    "witnesses": 10,
+    "source": {
+      "agency": "Other",
+      "collection": "Historical-Canon",
+      "url": null
+    },
+    "theater": null,
+    "evidence": [
+      "testimony"
+    ],
+    "status": "historical",
+    "tags": [
+      "disclosure",
+      "whistleblower",
+      "congressional",
+      "historical"
+    ]
+  }
+]

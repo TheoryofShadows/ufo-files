@@ -6,7 +6,7 @@ name: Deploy app to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/ufo-app-map-mobile-ax3shi]
     paths:
       - 'app/**'
       - 'src/**'

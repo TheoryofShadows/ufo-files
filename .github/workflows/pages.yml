@@ -47,6 +47,18 @@ jobs:
           BASE: /${{ github.event.repository.name }}/
         run: npm run build
 
+      # Force Pages into "GitHub Actions" build mode. Without this the repo can
+      # sit in legacy "deploy from a branch" mode, which serves the dev index.html
+      # from the repo root (referencing /src/main.jsx) instead of the built app.
+      - name: Force Pages to GitHub Actions mode
+        run: |
+          curl -sS -X PUT \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/pages" \
+            -d '{"build_type":"workflow"}' || echo "build_type update skipped"
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true

@@ -11,7 +11,7 @@
     "fetched": 25,
     "valid": 25,
     "invalid": 0,
-    "secs": 0.22
+    "secs": 0.07
   },
   "nara": {
     "strategy": "API",
@@ -50,9 +50,9 @@
   },
   "nuforc": {
     "strategy": "SCRAPE",
-    "fetched": 4249,
-    "valid": 4249,
+    "fetched": 4388,
+    "valid": 4388,
     "invalid": 0,
-    "secs": 0.44
+    "secs": 16.33
   }
 }

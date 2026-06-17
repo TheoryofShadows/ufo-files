@@ -4,14 +4,14 @@
     "fetched": 60,
     "valid": 60,
     "invalid": 0,
-    "secs": 0.0
+    "secs": 0.12
   },
   "pursue": {
     "strategy": "SEED",
     "fetched": 25,
     "valid": 25,
     "invalid": 0,
-    "secs": 0.14
+    "secs": 0.72
   },
   "nara": {
     "strategy": "API",
@@ -53,6 +53,6 @@
     "fetched": 4249,
     "valid": 4249,
     "invalid": 0,
-    "secs": 17.47
+    "secs": 0.11
   }
 }

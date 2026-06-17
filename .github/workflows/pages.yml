@@ -6,7 +6,7 @@ name: Deploy app to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/ufo-app-map-mobile-ax3shi]
     paths:
       - 'app/**'
       - 'src/**'
@@ -36,7 +36,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -48,6 +48,8 @@ jobs:
         run: npm run build
 
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -66,6 +66,24 @@ THEATERS = {
     "Lake Huron": (44.8, -82.5),
 }
 
+# US state geographic centers — fallback so an un-gazetteered city still pins in
+# the correct STATE rather than a wrong-state collision.
+STATE_CENTROIDS = {
+    "AL": (32.8, -86.8), "AK": (64.2, -149.5), "AZ": (34.3, -111.7), "AR": (34.8, -92.4),
+    "CA": (37.2, -119.5), "CO": (39.0, -105.5), "CT": (41.6, -72.7), "DE": (39.0, -75.5),
+    "FL": (28.6, -82.4), "GA": (32.6, -83.4), "HI": (20.3, -156.4), "ID": (44.4, -114.6),
+    "IL": (40.0, -89.2), "IN": (39.9, -86.3), "IA": (42.0, -93.5), "KS": (38.5, -98.4),
+    "KY": (37.5, -85.3), "LA": (31.0, -92.0), "ME": (45.4, -69.2), "MD": (39.0, -76.8),
+    "MA": (42.3, -71.8), "MI": (44.3, -85.4), "MN": (46.3, -94.3), "MS": (32.7, -89.7),
+    "MO": (38.4, -92.5), "MT": (47.0, -109.6), "NE": (41.5, -99.8), "NV": (39.3, -116.6),
+    "NH": (43.7, -71.6), "NJ": (40.1, -74.7), "NM": (34.4, -106.1), "NY": (42.9, -75.6),
+    "NC": (35.6, -79.4), "ND": (47.5, -100.5), "OH": (40.3, -82.8), "OK": (35.6, -97.5),
+    "OR": (43.9, -120.6), "PA": (40.9, -77.8), "RI": (41.7, -71.6), "SC": (33.9, -80.9),
+    "SD": (44.4, -100.2), "TN": (35.9, -86.4), "TX": (31.5, -99.3), "UT": (39.3, -111.7),
+    "VT": (44.1, -72.7), "VA": (37.5, -78.9), "WA": (47.4, -120.5), "WV": (38.6, -80.6),
+    "WI": (44.6, -90.0), "WY": (43.0, -107.5), "DC": (38.9, -77.0), "PR": (18.2, -66.4),
+}
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
@@ -228,20 +246,28 @@ def source_nuforc():
     if os.environ.get("NUFORC_OFFLINE"):
         return stamp(load_seed("nuforc"))
 
+    # State-aware gazetteer (built from the US Census place gazetteer):
+    # keyed "ST|cityname" so "Alma, MI" and "Alma, AR" no longer collide.
     geo = {}
-    p = SEEDS / "geo_cities.json"
+    p = SEEDS / "geo_us.json"
     if p.exists():
         geo = json.loads(p.read_text())
 
+    _paren = _re.compile(r"\(.*?\)")
+
     def geocode(city, state):
-        name = city.split("(")[0].strip().lower()
-        for key in (f"US|{name}",):
-            if key in geo:
-                lat, lng = geo[key]
-                # deterministic sub-city jitter so same-city reports don't stack
-                h = int(hashlib.sha1((city + state).encode()).hexdigest(), 16)
-                return round(lat + ((h % 1000) / 1000 - 0.5) * 0.18, 4), \
-                       round(lng + (((h >> 10) % 1000) / 1000 - 0.5) * 0.18, 4)
+        """(lat, lng, precision) — exact city when known, else state centroid."""
+        st = (state or "").strip().upper()
+        name = _paren.sub("", city).strip().lower()
+        h = int(hashlib.sha1((city + state).encode()).hexdigest(), 16)
+        g = geo.get(f"{st}|{name}")
+        if g:
+            return (round(g[0] + ((h % 1000) / 1000 - 0.5) * 0.05, 4),
+                    round(g[1] + (((h >> 10) % 1000) / 1000 - 0.5) * 0.05, 4), "city")
+        c = STATE_CENTROIDS.get(st)
+        if c:  # right state, approximate spot — never a wrong-state junk pin
+            return (round(c[0] + ((h % 1000) / 1000 - 0.5) * 1.2, 4),
+                    round(c[1] + (((h >> 10) % 1000) / 1000 - 0.5) * 1.2, 4), "region")
         return None
 
     SHAPES = {"disk": "disc", "disc": "disc", "saucer": "disc", "circle": "orb",
@@ -254,6 +280,18 @@ def source_nuforc():
     def norm_shape(s):
         s = (s or "").strip().lower()
         return SHAPES.get(s, "unknown" if not s else "other")
+
+    def report_url(row):
+        """Pull the real per-report permalink from the row's report-link cell.
+        NUFORC index rows link each case to /sighting/?id=NNNN — capture it so
+        the app deep-links to the actual report instead of the homepage."""
+        for a in row.find_all("a", href=True):
+            href = a["href"]
+            if "sighting" in href or "id=" in href:
+                if href.startswith("/"):
+                    href = "https://nuforc.org" + href
+                return href
+        return None
 
     def parse_table(html, collection):
         out = []
@@ -274,16 +312,19 @@ def source_nuforc():
                 continue
             tm = occ[11:16] if len(occ) >= 16 and ":" in occ[11:16] else None
             shp = norm_shape(shape_s)
+            # real permalink if present, else the NUFORC database (honest fallback,
+            # never a fake "exact report" link)
+            url = report_url(row) or "https://nuforc.org/databank/"
             out.append({
                 # id scheme matches the baked seed so live + seed union cleanly
                 "id": "nuforc-" + make_id(d, city, state, "US"),
                 "designator": None, "date": d, "date_precision": "day", "time": tm,
                 "location": f"{city}, {state}".strip(", "),
-                "lat": g[0], "lng": g[1], "geo_precision": "city",
+                "lat": g[0], "lng": g[1], "geo_precision": g[2],
                 "shape": shp, "duration": None,
                 "description": (summary[:560] or f"NUFORC report from {city}, {state}."),
                 "witnesses": 1,
-                "source": {"agency": "NUFORC", "collection": collection, "url": "https://nuforc.org"},
+                "source": {"agency": "NUFORC", "collection": collection, "url": url},
                 "theater": "US-Domestic", "evidence": ["testimony"],
                 "status": "unresolved",
                 "tags": ["NUFORC", "civilian"] + ([shp] if shp not in ("unknown", "other") else []),

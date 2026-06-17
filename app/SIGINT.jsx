@@ -747,7 +747,11 @@ function SRow({ s, sel, onTap, cc, bc, intel, score }) {
               )}
             </div>
           )}
-          {s.source && s.source.url && <a href={s.source.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ display: "inline-block", marginTop: 11, fontSize: 9.5, color: SEL_COL, textDecoration: "none", letterSpacing: "0.04em" }}>{"↗ "}{s.source.collection} source</a>}
+          {s.source && s.source.url && (() => {
+            const u = s.source.url, isDb = /\/databank|nuforc\.org\/?$/.test(u);
+            const label = isDb ? "Search NUFORC database" : (/sighting\/\?id=/.test(u) ? "View original report" : s.source.collection + " source");
+            return <a href={u} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} style={{ display: "inline-block", marginTop: 11, fontSize: 9.5, color: SEL_COL, textDecoration: "none", letterSpacing: "0.04em" }}>{"↗ "}{label}</a>;
+          })()}
         </div>
       )}
     </div>

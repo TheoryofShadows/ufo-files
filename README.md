@@ -1,5 +1,7 @@
 # SIGINT — UAP Files Pipeline + App
 
+**Live:** https://theoryofshadows.github.io/ufo-files/
+
 A data pipeline **and** a shippable app for the declassified UAP/UFO files. The
 key idea: **data lives in a versioned JSON, not hardcoded in the app.** A scraper
 pulls from every reachable government source into `data/files.json`, and the app
